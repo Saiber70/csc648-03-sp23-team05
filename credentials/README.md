@@ -10,12 +10,12 @@
 1. Server URL: ec2-50-18-71-109.us-west-1.compute.amazonaws.com, Public IP: 50.18.71.109
 2. SSH Username: ubuntu
 3. SSH password/key (file included in credentials folder): "group-5-key.pem"
-4. Database URL or IP and port used.
+4. Database URL: group-5-database.creq4wy6ghnn.us-west-1.rds.amazonaws.com, Port: 3306
     <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
-5. Database username
-6. Database password
-7. Database name (basically the name that contains all your tables)
-8. Instructions to connect to the server instance:
+6. Database username: leyvam21
+7. Database password: team5SQL
+8. Database name: group5_db
+9. Instructions to connect to the server instance:
    1. Install ssh client.
       - "sudo apt install openssh-client"
    2. Download and store the private key file.
