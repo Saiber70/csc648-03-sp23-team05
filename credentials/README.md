@@ -19,7 +19,9 @@
    1. Install ssh client.
       - "sudo apt install openssh-client"
    2. Download and store the private key file.
-   3. Use ssh to connect to the server instance using the above information.
+   3. Secure the key with the following command:
+      - "chmod 400 group-5-key.pem"
+   5. 4. Use ssh to connect to the server instance using the above information.
       - "ssh -i "group-5-key.pem" ubuntu@ec2-50-18-71-109.us-west-1.compute.amazonaws.com"
 
 # Most important things to Remember
