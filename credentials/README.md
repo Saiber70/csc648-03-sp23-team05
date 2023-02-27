@@ -7,22 +7,22 @@
 
 # Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
-1. Server URL: ec2-50-18-71-109.us-west-1.compute.amazonaws.com, Public IP: 50.18.71.109
+1. Server URL: ec2-54-177-178-242.us-west-1.compute.amazonaws.com Public IP: 54.177.178.242
 2. SSH Username: ubuntu
-3. SSH password/key (file included in credentials folder): "group-5-key.pem"
-4. Database URL: group-5-database.creq4wy6ghnn.us-west-1.rds.amazonaws.com, Port: 3306
+3. SSH password/key (file included in credentials folder): "team05-key.pem"
+4. Database URL: Port:
     <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
-6. Database username: leyvam21
-7. Database password: team5SQL
-8. Database name: group5_db
+6. Database username: 
+7. Database password: 
+8. Database name:
 9. Instructions to connect to the server instance:
    1. Install ssh client.
       - "sudo apt install openssh-client"
    2. Download and store the private key file.
    3. Secure the key with the following command:
-      - "chmod 400 group-5-key.pem"
+      - "chmod 400 team05-key.pem"
    5. 4. Use ssh to connect to the server instance using the above information.
-      - "ssh -i "group-5-key.pem" ubuntu@ec2-50-18-71-109.us-west-1.compute.amazonaws.com"
+      - "ssh -i "team05-key.pem" ubuntu@ec2-54-177-178-242.us-west-1.compute.amazonaws.com"
 
 # Most important things to Remember
 ## These values need to kept update to date throughout the semester. <br>
