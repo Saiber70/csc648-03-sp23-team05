@@ -15,7 +15,7 @@
 6. Database username: 
 7. Database password: 
 8. Database name:
-9. Instructions to connect to the server instance:
+9. Instructions to connect to the server instance and launch website:
    1. Install ssh client.
       - "sudo apt install openssh-client"
    2. Download and store the private key file.
@@ -23,6 +23,7 @@
       - "chmod 400 team05-key.pem"
    5. 4. Use ssh to connect to the server instance using the above information.
       - "ssh -i "team05-key.pem" ubuntu@ec2-54-177-178-242.us-west-1.compute.amazonaws.com"
+   6. Deploy web server using Server URL posted above.
 
 # Most important things to Remember
 ## These values need to kept update to date throughout the semester. <br>
