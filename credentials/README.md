@@ -10,12 +10,11 @@
 1. Server URL: ec2-54-177-178-242.us-west-1.compute.amazonaws.com Public IP: 54.177.178.242
 2. SSH Username: ubuntu
 3. SSH password/key (file included in credentials folder): "team05-key.pem"
-4. Database URL: Port:
-    <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
-6. Database username: 
-7. Database password: 
-8. Database name:
-9. Instructions to connect to the server instance and launch website:
+4. Database URL: 127.0.0.1 Port: 3306
+5. Database username: team05
+6. Database password: 12345678
+7. Database name: team05db
+8. Instructions to connect to the server instance and launch website:
    1. Install ssh client.
       - "sudo apt install openssh-client"
    2. Download and store the private key file.
