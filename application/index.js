@@ -4,6 +4,7 @@ const app = express();
 const router = express.Router();
 const mysql = require('mysql');
 
+// used to establish a connection between the front-end and team's database on the server
 const db = mysql.createConnection({
   host: '54.177.178.242',
   user: 'team05',
@@ -11,6 +12,7 @@ const db = mysql.createConnection({
   database: 'team05db',
 });
 
+// used to test connection to MySQL database
 db.connect((err) => {
   if (err) {
     throw err;
@@ -19,6 +21,7 @@ db.connect((err) => {
   db.query('USE team05db');
 });
 
+// function to search the back-end
 function search(req, res, next) {
     // user's search term
     let searchTerm = req.query.search;
@@ -56,11 +59,17 @@ router.get('/home', (req, res, next) => {
 
 router.get('/result', search, (req, res) => {
     let searchResult = req.searchResult;
+    // results renedered in a new results page
     res.render('result', {
+        //represents the title of the page
         title: "Results Page",
+        //represents the number of search results found
         results: searchResult.length,
+        //represents the user's search term
         searchTerm: req.searchTerm,
+        // An array of objects representing the search results
         searchResult: searchResult,
+        // represents the user's selected category
         category: req.category
     });
 });
