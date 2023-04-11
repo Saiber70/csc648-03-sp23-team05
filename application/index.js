@@ -2,10 +2,10 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 // used to establish a connection between the front-end and team's database on the server
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'team05',
   password: '12345678',
@@ -13,7 +13,7 @@ const db = mysql.createConnection({
 });
 
 // used to test connection to MySQL database
-db.connect((err) => {
+db.getConnection((err) => {
   if (err) {
     throw err;
   }
@@ -37,14 +37,6 @@ function search(req, res, next) {
         query = `SELECT * FROM Restaurant WHERE Category = '` + category + `'`;
     }
 
-    db.query("SELECT 1+1", function(err, results, fields) {
-         if(err) {
-             console.error(err);
-         }else{
-             console.log(results);
-         }
-    });
-
     db.query(query, (err, result) => {
         if (err) {
             req.searchResult = "";
@@ -65,8 +57,6 @@ router.get('/result', search, (req, res) => {
     let searchResult = req.searchResult;
     // results renedered in the home  page
     res.render('home', {
-        //represents the title of the page
-        title: "Home Page",
         //represents the number of search results found
         results: searchResult.length,
         //represents the user's search term
