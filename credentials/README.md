@@ -21,7 +21,7 @@
    3. Secure the key with the following command:
       - "chmod 400 team05-key.pem"
    5. 4. Use ssh to connect to the server instance using the above information.
-      - "ssh -i "team05-key.pem" ubuntu@ec2-54-177-178-242.us-west-1.compute.amazonaws.com"
+      - "ssh -i "team05-key.pem" ubuntu@ec2-54-177-79-178.us-west-1.compute.amazonaws.com"
    6. Deploy web server using Server URL posted above.
 
 # Most important things to Remember
