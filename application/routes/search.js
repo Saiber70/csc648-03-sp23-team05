@@ -1,6 +1,6 @@
-var express = require('express');
-const router = express.Router();
-const db = require('./conf/database');
+//var express = require('express');
+//const router = express.Router();
+const db = require('../conf/database');
 
 
 // used to test connection to MySQL database
@@ -43,17 +43,3 @@ function search(req, res, next) {
         next();
     });
 }
-
-//http://localhost:3000/result?category=American&search=my+restaurant
-router.get('/result', search, (req, res, next) => {
-    let searchResult = req.searchResult;
-    res.render('result', {
-        title: 'Results Page',
-        results: searchResult.length,
-        searchTerm: req.searchTerm,
-        searchResult: searchResult,
-        category: req.category
-    });
-  });
-
-module.exports = router;
