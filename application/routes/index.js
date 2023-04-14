@@ -10,8 +10,4 @@ router.get('/index', (req, res, next) => {
   res.render('index');
 });
 
-router.get('/result', (req, res, next) => {
-  res.render('result', {title:'Results Page'});
-});
-
 module.exports = router;
