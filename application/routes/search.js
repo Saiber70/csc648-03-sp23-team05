@@ -1,7 +1,7 @@
+/*
 //var express = require('express');
 //const router = express.Router();
 const db = require('../conf/database');
-
 
 // used to test connection to MySQL database
 db.getConnection((err) => {
@@ -43,3 +43,4 @@ function search(req, res, next) {
         next();
     });
 }
+*/
