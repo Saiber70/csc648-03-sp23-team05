@@ -1,3 +1,44 @@
 <h1>Hello There!</h1>
-<div id="main-content">
-</div>
+<!--<div id="main-content">
+    </div>-->
+<!--{{#if searchResult.length}}
+<p>{{searchResult.length}} results found for "{{searchTerm}}"</p>
+<ul>
+    {{#each searchResult}}
+    <li>{{this.restaurant_name}} - {{this.restaurant_address}} - {{this.price_range}} - {{this.restaurant_category}}
+    </li>
+    {{/each}}
+</ul>
+{{else}}
+<p>No results found for "{{searchTerm}}"</p>
+{{/if}}-->
+
+{{#if results.length}}
+<h1>Search Results</h1>
+<h2>{{results.length}} results found for "{{searchTerm}}" and Category: "{{category}}"</h2>
+{{#if category}}
+<h3>Category: {{category}}</h3>
+{{/if}}
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Price Range</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each results}}
+    <tr>
+      <td>{{this.restaurant_name}}</td>
+      <td>{{this.restaurant_address}}</td>
+      <td>{{this.price_range}}</td>
+      <td>{{this.restaurant_category}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+<h1>No results found for "{{searchTerm}}"</h1>
+{{/if}}

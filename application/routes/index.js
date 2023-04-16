@@ -1,8 +1,16 @@
 var express = require('express');
 const router = express.Router();
 const db = require('../conf/database');
-
-// used to test connection to MySQL database
+/*
+db.getConnection((err) => {
+    if (err) {
+        throw err;
+    }
+    console.log('MySql Connected!');
+    db.query('USE teamdb');
+});
+*/
+// used to test connection to MYSQL database
 db.getConnection((err) => {
     if (err) {
         throw err;
@@ -17,16 +25,17 @@ function search(req, res, next) {
     let searchTerm = req.query.search;
     // user's selected category
     let category = req.query.category;
-
     let query = 'SELECT * FROM Restaurant';
     if (searchTerm != '' && category != '') {
         query = `SELECT * FROM Restaurant WHERE restaurant_category = '` + category + `' AND restaurant_name LIKE '%` + searchTerm + `%'`;
-    } else if (searchTerm != '' && category == '') {
+    } else if (searchTerm != '' && category == 'All Categories') {
         query = `SELECT * FROM Restaurant WHERE restaurant_name LIKE '%` + searchTerm + `%'`;
     } else if (searchTerm == '' && category != '') {
         query = `SELECT * FROM Restaurant WHERE Category = '` + category + `'`;
+    } else if (searchTerm == '' && category == 'All Categories') {
+        query = 'SELECT * FROM Restaurant';
     }
-
+    
     db.query(query, (err, result) => {
         if (err) {
             req.searchResult = [];
@@ -40,6 +49,14 @@ function search(req, res, next) {
         req.category = category;
 
         next();
+        /*
+        res.render('result', {
+            title: 'Search Results',
+            results: req.searchResult,
+            searchTerm: req.searchTerm,
+            category: req.category
+        });
+        */
     });
 }
 
@@ -52,17 +69,15 @@ router.get('/index', (req, res, next) => {
     res.render('index', { title: 'Team Page' });
 });
 
-router.get('/result', (req, res, next) => {
-    res.render('result', { title: 'Results Page' });
-});
-
-router.get('/result', search, (req, res, next) => {
+//http://localhost:3000/result?category=value&search=value
+router.get('/result', search, function (req, res, next) {
     let searchResult = req.searchResult;
     res.render('result', {
-        title: 'Results Page',
-        results: searchResult.length,
+        title: 'Search Results',
+        results: searchResult,
+        //results: searchResult.length,
         searchTerm: req.searchTerm,
-        searchResult: searchResult,
+        //searchResult: searchResult,
         category: req.category
     });
 });
