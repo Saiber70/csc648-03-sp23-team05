@@ -1,44 +1,22 @@
-<h1>Hello There!</h1>
-<!--<div id="main-content">
-    </div>-->
-<!--{{#if searchResult.length}}
-<p>{{searchResult.length}} results found for "{{searchTerm}}"</p>
-<ul>
-    {{#each searchResult}}
-    <li>{{this.restaurant_name}} - {{this.restaurant_address}} - {{this.price_range}} - {{this.restaurant_category}}
-    </li>
-    {{/each}}
-</ul>
-{{else}}
-<p>No results found for "{{searchTerm}}"</p>
-{{/if}}-->
-
 {{#if results.length}}
-<h1>Search Results</h1>
-<h2>{{results.length}} results found for "{{searchTerm}}" and Category: "{{category}}"</h2>
-{{#if category}}
-<h3>Category: {{category}}</h3>
-{{/if}}
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Price Range</th>
-      <th>Category</th>
-    </tr>
-  </thead>
-  <tbody>
+<h3>{{results.length}} results found</h3>
+<div class="container">
+  <div class="row">
     {{#each results}}
-    <tr>
-      <td>{{this.restaurant_name}}</td>
-      <td>{{this.restaurant_address}}</td>
-      <td>{{this.price_range}}</td>
-      <td>{{this.restaurant_category}}</td>
-    </tr>
+    <div class="col">
+      <div class="card bg-dark" style="width: 18rem;">
+        <img class="card-img-top text-white" src="..." alt="Card image cap">
+        <div class="card-body text-white">
+          <h5 class="card-title">{{this.restaurant_name}}</h5>
+          <p class="card-text">Address:{{this.restaurant_address}}</p>
+          <p class="card-text">Price:{{this.price_range}}</p>
+          <p class="card-text">Category:{{this.restaurant_category}}</p>
+        </div>
+      </div>
+    </div>
     {{/each}}
-  </tbody>
-</table>
+  </div>
+</div>
 {{else}}
-<h1>No results found for "{{searchTerm}}"</h1>
+<h1>No results found</h1>
 {{/if}}

@@ -1,6 +1,7 @@
 var express = require('express');
 const router = express.Router();
 const db = require('../conf/database');
+
 /*
 db.getConnection((err) => {
     if (err) {
@@ -10,6 +11,7 @@ db.getConnection((err) => {
     db.query('USE teamdb');
 });
 */
+
 // used to test connection to MYSQL database
 db.getConnection((err) => {
     if (err) {
@@ -28,12 +30,10 @@ function search(req, res, next) {
     let query = 'SELECT * FROM Restaurant';
     if (searchTerm != '' && category != '') {
         query = `SELECT * FROM Restaurant WHERE restaurant_category = '` + category + `' AND restaurant_name LIKE '%` + searchTerm + `%'`;
-    } else if (searchTerm != '' && category == 'All Categories') {
+    } else if (searchTerm != '' && category == '') {
         query = `SELECT * FROM Restaurant WHERE restaurant_name LIKE '%` + searchTerm + `%'`;
     } else if (searchTerm == '' && category != '') {
-        query = `SELECT * FROM Restaurant WHERE Category = '` + category + `'`;
-    } else if (searchTerm == '' && category == 'All Categories') {
-        query = 'SELECT * FROM Restaurant';
+        query = `SELECT * FROM Restaurant WHERE restaurant_category = '` + category + `'`;
     }
     
     db.query(query, (err, result) => {
