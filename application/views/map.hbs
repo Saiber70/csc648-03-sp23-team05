@@ -1,0 +1,41 @@
+<!--
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
+
+<h1>My Google Map</h1>
+<div id="map"></div>
+
+<script>
+    function initMap() {
+        // Map options
+        var options = {
+            zoom: 8,
+            center: { lat: 37.7749, lng: -122.4194 }
+        }
+
+        // New map
+        var map = new google.maps.Map(document.getElementById('map'), options);
+
+        var marker = new google.maps.Marker({
+            position: { lat: 37.6879, lng: -122.4702 },
+            map: map
+        });
+
+        var infoWindow = new google.maps.InfoWindow({
+            content: '<h2>Daly City</h2>'
+        });
+
+        marker.addListener('click', function () {
+            infoWindow.open(map, marker);
+        });
+    }
+</script>
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmqtDK6VhShU_U-oV8SrGI53wSluNA-wI&callback=initMap">
+    </script>
+    -->
