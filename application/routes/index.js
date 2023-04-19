@@ -2,16 +2,6 @@ var express = require('express');
 const router = express.Router();
 const db = require('../conf/database');
 
-/*
-db.getConnection((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log('MySql Connected!');
-    db.query('USE teamdb');
-});
-*/
-
 // used to test connection to MYSQL database
 db.getConnection((err) => {
     if (err) {
@@ -49,14 +39,6 @@ function search(req, res, next) {
         req.category = category;
 
         next();
-        /*
-        res.render('result', {
-            title: 'Search Results',
-            results: req.searchResult,
-            searchTerm: req.searchTerm,
-            category: req.category
-        });
-        */
     });
 }
 
@@ -75,9 +57,7 @@ router.get('/result', search, function (req, res, next) {
     res.render('result', {
         title: 'Search Results',
         results: searchResult,
-        //results: searchResult.length,
         searchTerm: req.searchTerm,
-        //searchResult: searchResult,
         category: req.category
     });
 });

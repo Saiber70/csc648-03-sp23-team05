@@ -32,7 +32,7 @@ router.post('/', upload.single('image'), (req, res) => {
             height: 200,
             fit: 'cover'
         })
-        .toFile(req.file.filename)
+        .toFile(`${req.file.destination}/thumbnail-${req.file.filename}`)
         .then(() => {
             const query = `UPDATE Restaurant SET image_path = ? WHERE restaurant_name = ?`;
             db.query(query, [filePath, restaurantName], (err, result) => {

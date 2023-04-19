@@ -5,7 +5,9 @@
     {{#each results}}
     <div class="col-4 mt-4">
       <div class="card bg-dark">
-        <img class="card-img-top text-white" src={{this.image_path}} alt="Card image cap">
+        <a href="">
+        <img class="card-img-top" style="height:200px; object-fit:cover;" src={{this.image_path}} alt="Card image cap">
+        </a>
         <div class="card-body text-white">
           <h5 class="card-title">{{this.restaurant_name}}</h5>
           <p class="card-text">Address:{{this.restaurant_address}}</p>
