@@ -1,0 +1,20 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/" style="color:white">HungryGator</a>
+    <form class="d-flex input-group w-auto" action="/result" method="get">
+      <div class="input-group">
+        <select id="category" class="form-select" name="category">
+          <option selected value="">All Categories</option>
+          <option value="American">American</option>
+          <option value="Mexican">Mexican</option>
+          <option value="Chinese">Chinese</option>
+          <option value="Japanese">Japanese</option>
+          <option value="Pizza">Pizza</option>
+        </select>
+        <input id="search" type="text" name="search" class="form-control rounded" placeholder="Search..."
+          aria-label="Search" aria-describedby="search-addon" />
+        <button id="search-button" type="submit" class="btn btn-outline-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</nav>
