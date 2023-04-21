@@ -17,6 +17,10 @@ function search(req, res, next) {
     let searchTerm = req.query.search;
     // user's selected category
     let category = req.query.category;
+
+    req.session.searchTerm = searchTerm;
+    req.session.category = category;
+
     let query = 'SELECT * FROM Restaurant';
     if (searchTerm != '' && category != '') {
         query = `SELECT * FROM Restaurant WHERE restaurant_category = '` + category + `' AND restaurant_name LIKE '%` + searchTerm + `%'`;

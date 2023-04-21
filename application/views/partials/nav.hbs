@@ -3,7 +3,7 @@
     <a class="navbar-brand" href="/" style="color:white">HungryGator</a>
     <form class="d-flex input-group w-auto" action="/result" method="get">
       <div class="input-group">
-        <select id="category" class="form-select" name="category">
+        <select id="category" class="form-select" name="category" value="{{category}}">
           <option selected value="">All Categories</option>
           <option value="American">American</option>
           <option value="Mexican">Mexican</option>
@@ -12,7 +12,7 @@
           <option value="Pizza">Pizza</option>
         </select>
         <input id="search" type="text" name="search" class="form-control rounded" placeholder="Search..."
-          aria-label="Search" aria-describedby="search-addon" />
+          aria-label="Search" aria-describedby="search-addon" value="{{searchTerm}}"/>
         <button id="search-button" type="submit" class="btn btn-outline-primary">Submit</button>
       </div>
     </form>
