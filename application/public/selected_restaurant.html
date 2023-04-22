@@ -1,0 +1,236 @@
+ <!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link
+                rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+                integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+                crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+        <title>Name of Restaurant</title>
+    </head>
+
+    <body style="min-height:100vh" >
+        <!--start of navigation bar-->
+        <ul class="container-fluid border" style="/*background-color: gray;*/ color: black; margin-bottom: 2px;">
+            <ul class="row">
+                <!--<div class="row gx-1 gy-5"> gx=space left/right  gy=space top/bottom-->
+                <!--<div class="col">Logo</div>-->
+                <div class="col" style="display: flex;align-items: center;
+                                    justify-content: center;">
+                    <nav class="navbar navbar-light "><!--bg-light-->
+                        <a class="navbar-brand" href="<!--link to home page-->">
+                            <i class="bi bi-cup-hot" style="color:purple"> Hungry Gator</i>
+                            <!--<img src="image_logo" width="30" height="30" class="d-inline-block align-top">-->
+                        </a>
+                    </nav>
+                </div>
+
+                <div class="col-7" style="display: flex;align-items: center;
+                                    justify-content: center;">
+                    <div class="input-group">
+                        <select id="category" class="form-select" name="category">
+                            <option selected>Categories</option>
+                            <option value="food 1">food 1</option>
+                            <option value="food 2">food 2</option>
+                        </select>
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button id="search-button" type="submit" class="btn btn-outline-dark">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <!--
+                <div class="col" style="display: flex;align-items: center;
+                    justify-content: center;" >
+                    <button type="button" class="btn btn-outline-dark" href="....">Sign In</button>
+                    <button type="button" class="btn btn-outline-dark"href="....">Sign Up</button>
+                </div>
+                -->
+                <div class="col" style="display: flex;align-items: center;
+                                    justify-content: center;">
+                    <div class="row align-items-center"  style="display: flex;align-items: center;
+                                    justify-content: center;">
+                        <button type="button"class="btn btn-outline-dark" href="....">Sign In</button>
+                        <button type="button" class="btn btn-outline-dark"href="....">Sign Up</button>
+                    </div>
+                </div>
+            </ul>
+        </ul>
+        <!--end of navigation bar-->
+
+        <!--start of Name and cart-->
+        <div class="row justify-content-around"  style="margin-top:1rem; margin-bottom:1rem">
+
+            <!-- start of Restaurant content-->
+            <div class="col-5" >
+                <h5>Name of Restaurant</h5>
+                <h5>description</h5>
+            </div>
+            <!-- end of Restaurant content-->
+
+            <!-- start of cart icon--->
+            <div class="col-5 ">
+                <h2 class="text-right">
+                    <button type="button" class="btn btn-outline-dark" href="....">
+                    <i class="bi bi-cart3"></i></button>
+                </h2>
+            </div>
+            <!---end of cart icon -->
+
+
+        </div>
+        <!---end of Name and cart--->
+
+        <!--start of restaurant menu---->
+        <div class="row justify-content-md-center" style="margin-bottom:3rem">
+
+                <!-- start of left column --->
+                <div class="col col-lg-4">
+
+                    <!-- start of item 1-->
+                    <div class="row border"style="padding:1rem;margin:0.5rem">
+                        <div class="col-lg-5">
+                            <img src="https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?b=1&s=170667a&w=0&k=20&c=P3jIQq8gVqlXjd4kP2OrXYyzqEXSWCwwYtwrd81psDY=" class="card-img-top">
+                        </div>
+                        <div class="col-md-4 card-body" >
+                            <p class="card-title">Name of Plate:</p>
+                            <p class="card=text">Description fo food:</p>
+                        </div>
+                        <div class="col-md-3 align-self-center" >
+                            <button  class="btn btn-outline-dark" href="....">price</button>
+                        </div>
+                    </div>
+                    <!-- end of item 1-->
+
+                    <!-- start of item 2-->
+                    <div class="row border"style="padding:1rem;margin:0.5rem">
+                        <div class="col-lg-5">
+                            <img src="https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?b=1&s=170667a&w=0&k=20&c=P3jIQq8gVqlXjd4kP2OrXYyzqEXSWCwwYtwrd81psDY=" class="card-img-top">
+                        </div>
+                        <div class="col-md-4 card-body" >
+                            <p class="card-title">Name of Plate:</p>
+                            <p class="card=text">Description fo food:</p>
+                        </div>
+                        <div class="col-md-3 align-self-center" >
+                            <button  class="btn btn-outline-dark" href="....">price</button>
+                        </div>
+                    </div>
+                    <!-- end of item 2-->
+
+                    <!-- start of item 3-->
+                    <div class="row border"style="padding:1rem;margin:0.5rem">
+                        <div class="col-lg-5">
+                            <img src="https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?b=1&s=170667a&w=0&k=20&c=P3jIQq8gVqlXjd4kP2OrXYyzqEXSWCwwYtwrd81psDY=" class="card-img-top">
+                        </div>
+                        <div class="col-md-4 card-body" >
+                            <p class="card-title">Name of Plate:</p>
+                            <p class="card=text">Description fo food:</p>
+                        </div>
+                        <div class="col-md-3 align-self-center" >
+                            <button  class="btn btn-outline-dark" href="....">price</button>
+                        </div>
+                    </div>
+                    <!-- end of item 3-->
+
+                    <!-- start of item 4-->
+                    <div class="row border"style="padding:1rem;margin:0.5rem">
+                        <div class="col-lg-5">
+                            <img src="https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?b=1&s=170667a&w=0&k=20&c=P3jIQq8gVqlXjd4kP2OrXYyzqEXSWCwwYtwrd81psDY=" class="card-img-top">
+                        </div>
+                        <div class="col-md-4 card-body" >
+                            <p class="card-title">Name of Plate:</p>
+                            <p class="card=text">Description fo food:</p>
+                        </div>
+                        <div class="col-md-3 align-self-center" >
+                            <button  class="btn btn-outline-dark" href="....">price</button>
+                        </div>
+                    </div>
+                    <!-- end of item 4-->
+
+
+                </div>
+                <!-- end of left column --->
+
+                <!-- start of right column --->
+                <div class="col col-lg-4">
+
+
+                    <!-- start of item 1-->
+                    <div class="row border"style="padding:1rem;margin:0.5rem">
+                        <div class="col-lg-5">
+                            <img src="https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?b=1&s=170667a&w=0&k=20&c=P3jIQq8gVqlXjd4kP2OrXYyzqEXSWCwwYtwrd81psDY=" class="card-img-top">
+                        </div>
+                        <div class="col-md-4 card-body" >
+                            <p class="card-title">Name of Plate:</p>
+                            <p class="card=text">Description fo food:</p>
+                        </div>
+                        <div class="col-md-3 align-self-center" >
+                            <button  class="btn btn-outline-dark" href="....">price</button>
+                        </div>
+                    </div>
+                    <!-- end of item 1-->
+
+                    <!-- start of item 2-->
+                    <div class="row border"style="padding:1rem;margin:0.5rem">
+                        <div class="col-lg-5">
+                            <img src="https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?b=1&s=170667a&w=0&k=20&c=P3jIQq8gVqlXjd4kP2OrXYyzqEXSWCwwYtwrd81psDY=" class="card-img-top">
+                        </div>
+                        <div class="col-md-4 card-body" >
+                            <p class="card-title">Name of Plate:</p>
+                            <p class="card=text">Description fo food:</p>
+                        </div>
+                        <div class="col-md-3 align-self-center" >
+                            <button  class="btn btn-outline-dark" href="....">price</button>
+                        </div>
+                    </div>
+                    <!-- end of item 2-->
+
+                    <!-- start of item 3-->
+                    <div class="row border"style="padding:1rem;margin:0.5rem">
+                        <div class="col-lg-5">
+                            <img src="https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?b=1&s=170667a&w=0&k=20&c=P3jIQq8gVqlXjd4kP2OrXYyzqEXSWCwwYtwrd81psDY=" class="card-img-top">
+                        </div>
+                        <div class="col-md-4 card-body" >
+                            <p class="card-title">Name of Plate:</p>
+                            <p class="card=text">Description fo food:</p>
+                        </div>
+                        <div class="col-md-3 align-self-center" >
+                            <button  class="btn btn-outline-dark" href="....">price</button>
+                        </div>
+                    </div>
+                    <!-- end of item 3-->
+
+                    <!-- start of item 4-->
+                    <div class="row border"style="padding:1rem;margin:0.5rem">
+                        <div class="col-lg-5">
+                            <img src="https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?b=1&s=170667a&w=0&k=20&c=P3jIQq8gVqlXjd4kP2OrXYyzqEXSWCwwYtwrd81psDY=" class="card-img-top">
+                        </div>
+                        <div class="col-md-4 card-body" >
+                            <p class="card-title">Name of Plate:</p>
+                            <p class="card=text">Description fo food:</p>
+                        </div>
+                        <div class="col-md-3 align-self-center" >
+                            <button  class="btn btn-outline-dark" href="....">price</button>
+                        </div>
+                    </div>
+                    <!-- end of item 4-->
+
+                </div>
+                <!-- end of left column --->
+
+        </div>
+        <!-- end of restaurant menu-->
+
+        <!----start of footer-->
+        <footer style="position:sticky; top:100%;
+        background-color:#7002c4;color:white; height:6rem;padding:2rem ">
+            <p class="text-center">Hungry Gator</p>
+        </footer>
+        <!---end of footer--->
+
+    </body>
+</html>
