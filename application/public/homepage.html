@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link
+                rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+                integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+                crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+        <title>HomePage</title>
+    </head>
+
+    <body style="min-height:100vh">
+        <!--start of navigation bar-->
+        <ul class="container-fluid border" style="/*background-color: gray;*/ color: black; margin-bottom: 2px;">
+            <ul class="row">
+                <!--<div class="row gx-1 gy-5"> gx=space left/right  gy=space top/bottom-->
+                <!--<div class="col">Logo</div>-->
+                <div class="col" style="display: flex;align-items: center;
+                            justify-content: center;">
+                    <nav class="navbar navbar-light "><!--bg-light-->
+                        <a class="navbar-brand" href="<!--link to home page-->">
+                            <i class="bi bi-cup-hot" style="color:purple"> Hungry Gator</i>
+                            <!--<img src="image_logo" width="30" height="30" class="d-inline-block align-top">-->
+                        </a>
+                    </nav>
+                </div>
+
+                <div class="col-7" style="display: flex;align-items: center;
+                            justify-content: center;">
+                    <div class="input-group">
+                        <select id="category" class="form-select" name="category">
+                            <option selected>Categories</option>
+                            <option value="food 1">food 1</option>
+                            <option value="food 2">food 2</option>
+                        </select>
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button id="search-button" type="submit" class="btn btn-outline-dark">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <!--
+                <div class="col" style="display: flex;align-items: center;
+                    justify-content: center;" >
+                    <button type="button" class="btn btn-outline-dark" href="....">Sign In</button>
+                    <button type="button" class="btn btn-outline-dark"href="....">Sign Up</button>
+                </div>
+                -->
+                <div class="col" style="display: flex;align-items: center;
+                            justify-content: center;">
+                    <div class="row align-items-center"  style="display: flex;align-items: center;
+                            justify-content: center;">
+                        <button type="button"class="btn btn-outline-dark" href="....">Sign In</button>
+                        <button type="button" class="btn btn-outline-dark"href="....">Sign Up</button>
+                    </div>
+                </div>
+            </ul>
+        </ul>
+        <!--end of navigation bar-->
+
+
+        <!--- start of big image with name--->
+        <div class="bg-image container-fluid border text-center " style="background-image: url(https://images.rawpixel.com/image_1300/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3B4MTM2OTgxMy1pbWFnZS1rd3Z4eHA5MS5qcGc.jpg)">
+            <div class="row" style="height:35rem;">
+                <div class="col" style="display: flex;align-items: center;
+                        justify-content: center;">
+                    <blockquote class="blockquote">
+                        <h1 class="mb-0" style="color:white;">Hungry Gator</h1>
+                        <footer class="blockquote-footer" style="color:white" >Slogan... </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        <!---- end of big image with name--->
+
+
+        <div class=" container-fluid border text-center">
+            <h3 style=" margin-top:10rem">Categories</h3>
+
+            <div class="row justify-content-center">
+
+                <!---- categories ------->
+                <div class="card-group " style="margin-bottom:1rem;">
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card h-100" style="padding:5px;margin:2px;">
+                            <img src="https://images.rawpixel.com/image_1300/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3AtMzAwLXRlZDA4NzA0LWV5ZV8yLmpwZw.jpg"
+                                 class="card-img-top" style="height:15rem">
+                            <div class="card-body">
+                                <h5 class="card-title">Italian</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 align-items-stretch">
+                        <div class="card h-100" style="padding:5px;margin:2px;">
+                            <img src="https://images.rawpixel.com/image_1300/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL2ZyZ291cm1ldF9zdGVhbWVkX2ppYW96aV84MDY5ODYtaW1hZ2Uta3liYmV2ZjMuanBn.jpg"
+                                 class="card-img-top" style="height:15rem">
+                            <div class="card-body">
+                                <h5 class="card-title">Asian</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 align-items-stretch">
+                        <div class="card h-100" style="padding:5px;margin:2px;">
+                            <img src="https://cdn.pixabay.com/photo/2019/05/31/01/52/tacos-4241262_1280.jpg" class="card-img-top" style="height:15rem">
+                            <div class="card-body">
+                                <h5 class="card-title">Mexican</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 align-items-stretch">
+                        <div class="card h-100" style="padding:5px;margin:2px;">
+                            <img src="https://cdn.pixabay.com/photo/2018/05/30/19/12/burger-3442206_1280.jpg" class="card-img-top"style="height:15rem" >
+                            <div class="card-body">
+                                <h5 class="card-title">American</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <!--- end of categories-->
+
+                <!--- start of Register--->
+                <div class="container-fluid border text-center">
+                    <div class="row d-flex align-items-center" style="height:35rem;">
+                        <div class="col" ><!--style="display: flex;align-items: center;
+                        justify-content: center;"-->
+                            <img class="shadow p-3 mb-5 bg-white rounded" src="https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?b=1&s=170667a&w=0&k=20&c=P3jIQq8gVqlXjd4kP2OrXYyzqEXSWCwwYtwrd81psDY=">
+                        </div>
+                        <div class="col"> <!--style="display: flex;align-items: center;justify-content: center;"-->
+                            <blockquote class="blockquote">
+                                <p class="mb-0">Become a Driver</p>
+                                <footer class="blockquote-footer">Register Today</footer>
+                                <button type="button" class="btn btn-outline-warning"href="....">Register</button>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of register--->
+
+                <!-- start of register restaurant --->
+                <div class="container-fluid border text-center">
+                    <div class="row d-flex align-items-center" style="height:35rem;">
+                        <div class="col"  ><!--style="display: flex;align-items: center;
+                        justify-content: center;">-->
+                            <blockquote class="blockquote">
+                                <p class="mb-0">Restaurant Owner?</p>
+                                <footer class="blockquote-footer">Register your restaurant today!</footer>
+                                <button type="button" class="btn btn-outline-warning"href="....">Register</button>
+                            </blockquote>
+                        </div>
+                        <div class="col" ><!---style="display: flex;align-items: center;
+                        justify-content: center;">-->
+                            <img class="shadow p-3 mb-5 bg-white rounded" src="https://media.istockphoto.com/id/1316145932/photo/table-top-view-of-spicy-food.jpg?b=1&s=170667a&w=0&k=20&c=P3jIQq8gVqlXjd4kP2OrXYyzqEXSWCwwYtwrd81psDY=">
+                        </div>
+                    </div>
+                </div>
+                <!---- end of register restaurant --->
+
+            </div>
+        </div>
+
+        <!----start of footer-->
+        <footer style="position:sticky; top:100%;
+        background-color:#7002c4;color:white; height:6rem;padding:2rem ">
+            <p class="text-center">Hungry Gator</p>
+        </footer>
+        <!---end of footer--->
+
+    </body>
+</html>
