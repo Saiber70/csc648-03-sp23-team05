@@ -1,3 +1,17 @@
+/**************************************************************
+* Author: Mario Leyva Moreno
+*
+* File: posts.js
+*
+* Description: The purpose of this router file is to set up a path to a
+* page where users are able to post images. Images are uploaded using the sharp
+* and multer modules, which are used to specify where the uploaded files should be stored
+* and in what format. It also updates our database by updating the object's image path with the
+* file path of the uploaded image.
+*
+**************************************************************/
+
+
 var express = require('express');
 const router = express.Router();
 var db = require('../conf/database');

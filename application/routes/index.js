@@ -2,6 +2,15 @@ var express = require('express');
 const router = express.Router();
 const db = require('../conf/database');
 
+db.getConnection((err) => {
+    if (err) {
+        throw err;
+    }
+    console.log('MySql Connected!');
+    db.query('USE teamdb');
+});
+
+/*
 // used to test connection to MYSQL database
 db.getConnection((err) => {
     if (err) {
@@ -10,6 +19,7 @@ db.getConnection((err) => {
     console.log('MySql Connected!');
     db.query('USE team05db');
 });
+*/
 
 // function to search the back-end
 function search(req, res, next) {
@@ -49,6 +59,38 @@ router.get('/', function (req, res, next) {
 
 router.get('/index', (req, res, next) => {
     res.render('index', { title: 'Team Page' });
+});
+
+router.get('/login', (req, res, next) => {
+    res.render('login');
+});
+
+router.get('/register', (req, res, next) => {
+    res.render('register');
+});
+
+router.get('/checkout', (req, res, next) => {
+    res.render('checkout');
+});
+
+router.get('/register-driver', (req, res, next) => {
+    res.render('register_driver');
+});
+
+router.get('/register-restaurant', (req, res, next) => {
+    res.render('register_restaurant');
+});
+
+router.get('/upload', (req, res, next) => {
+    res.render('menu_upload');
+});
+
+router.get('/selected', (req, res, next) => {
+    res.render('selected_restaurant');
+});
+
+router.get('/orders', (req, res, next) => {
+    res.render('orders');
 });
 
 //http://localhost:3000/result?category=value&search=value

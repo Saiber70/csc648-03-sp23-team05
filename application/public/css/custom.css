@@ -1,0 +1,139 @@
+#main-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#footer {
+  background-color: #7002c4;
+  color: white;
+  margin-top: auto;
+  padding: 5px;
+}
+
+.bi.bi-cup-hot {
+  color: purple;
+}
+
+#flex-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.col-7 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row.align-items-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#sign-in-button {
+  margin: 3px;
+  margin-top: 7px;
+}
+
+#sign-up-button {
+  margin: 3px;
+  margin-top: 7px;
+}
+
+.bg-image.container-fluid.border.text-center {
+  background-image: url(https://images.rawpixel.com/image_1300/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3B4MTM2OTgxMy1pbWFnZS1rd3Z4eHA5MS5qcGc.jpg);
+}
+
+#home-row {
+  height: 35rem;
+}
+
+#home-title {
+  color: white;
+}
+
+#slogan-footer {
+  color: white;
+}
+
+#register-footer {
+  color: gray;
+}
+
+#owner-footer {
+  color: gray;
+}
+
+.card-group {
+  margin-bottom: 1rem;
+}
+
+.card.h-100 {
+  padding: 5px;
+  margin: 2px;
+}
+
+#home-image {
+  height: 15rem;
+}
+
+#category-title {
+  margin-top: 10rem;
+}
+
+.row.d-flex.align-items-center {
+  height: 35rem;
+}
+
+.login-container {
+  margin-top:5rem;
+}
+
+#login-form {
+  padding-bottom: 3rem;
+  padding-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+#login-email {
+  margin-bottom:1rem;
+  margin-top:1rem;
+}
+
+#login-password {
+  margin-bottom:1rem;
+  margin-top:1rem;
+}
+
+#search {
+  width:600px;
+}
+
+/*
+#login-form {
+  padding-bottom:3rem; 
+  padding-top:3rem;
+  margin-bottom:3rem
+}
+
+#email-field {
+  margin-bottom:1rem;
+  margin-top:1rem
+}
+
+#password-field {
+  margin-bottom:1rem;
+  margin-top:1rem;
+}
+
+#login-buttons {
+  margin-bottom:2rem;
+}
+
+#password-link {
+  margin: 1rem;
+}
+*/
