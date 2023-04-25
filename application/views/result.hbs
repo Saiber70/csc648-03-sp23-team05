@@ -1,12 +1,16 @@
 {{#if results.length}}
 <h3>{{results.length}} results found</h3>
+<div id="map">
+  
+</div>
 <div class="container">
   <div class="row">
     {{#each results}}
     <div class="col-4 mt-4">
       <div class="card bg-dark">
         <a href="">
-        <img class="card-img-top" style="height:200px; object-fit:cover;" src={{this.image_path}} alt="Card image cap">
+          <img class="card-img-top" style="height:200px; object-fit:cover;" src={{this.image_path}}
+            alt="Card image cap">
         </a>
         <div class="card-body text-white">
           <h5 class="card-title">{{this.restaurant_name}}</h5>

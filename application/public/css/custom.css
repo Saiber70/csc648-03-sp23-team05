@@ -89,7 +89,7 @@
 }
 
 .login-container {
-  margin-top:5rem;
+  margin-top: 5rem;
 }
 
 #login-form {
@@ -99,17 +99,22 @@
 }
 
 #login-email {
-  margin-bottom:1rem;
-  margin-top:1rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 #login-password {
-  margin-bottom:1rem;
-  margin-top:1rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 #search {
-  width:600px;
+  width: 600px;
+}
+
+#map {
+  height: 400px;
+  width: 100%;
 }
 
 /*

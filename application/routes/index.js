@@ -93,6 +93,10 @@ router.get('/orders', (req, res, next) => {
     res.render('orders');
 });
 
+router.get('/map', (req, res, next) => {
+    res.render('map');
+});
+
 //http://localhost:3000/result?category=value&search=value
 router.get('/result', search, function (req, res, next) {
     let searchResult = req.searchResult;
