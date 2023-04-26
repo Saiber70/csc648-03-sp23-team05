@@ -2,15 +2,6 @@ var express = require('express');
 const router = express.Router();
 const db = require('../conf/database');
 
-db.getConnection((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log('MySql Connected!');
-    db.query('USE teamdb');
-});
-
-/*
 // used to test connection to MYSQL database
 db.getConnection((err) => {
     if (err) {
@@ -19,7 +10,6 @@ db.getConnection((err) => {
     console.log('MySql Connected!');
     db.query('USE team05db');
 });
-*/
 
 // function to search the back-end
 function search(req, res, next) {
@@ -29,6 +19,7 @@ function search(req, res, next) {
     let category = req.query.category;
     let filter = req.query.filter;
     let query = 'SELECT * FROM Restaurant';
+
     if (searchTerm != '' && category != '') {
         query = `SELECT * FROM Restaurant WHERE restaurant_category = '` + category + `' AND restaurant_name LIKE '%` + searchTerm + `%'`;
     } else if (searchTerm != '' && category == '') {
@@ -42,7 +33,7 @@ function search(req, res, next) {
     } else if(filter == 'High to Low') {
         query = `SELECT * FROM Restaurant ORDER BY price_range DESC`;
     } else if(filter == 'Featured') {
-        query = `SELECT * FROM Restaurant`;
+        query = `SELECT * FROM Restaurant ORDER BY restaurant_id`;
     }
     
     db.query(query, (err, result) => {
@@ -100,10 +91,6 @@ router.get('/selected', (req, res, next) => {
 
 router.get('/orders', (req, res, next) => {
     res.render('orders');
-});
-
-router.get('/map', (req, res, next) => {
-    res.render('map');
 });
 
 //http://localhost:3000/result?category=value&search=value

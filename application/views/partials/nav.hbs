@@ -11,7 +11,7 @@
         <div class="col-7">
             <form action="/result" method="get">
                 <div class="input-group">
-                    <select id="category" class="form-select" name="category">
+                    <select id="category" class="form-select" name="category" value="{{category}}">
                         <option selected value="">All Categories</option>
                         <option value="American">American</option>
                         <option value="Mexican">Mexican</option>
@@ -19,8 +19,8 @@
                         <option value="Japanese">Japanese</option>
                         <option value="Pizza">Pizza</option>
                     </select>
-                    <input id="search" class="form-control mr-sm-2" type="search" name="search" placeholder="Search"
-                        aria-label="Search" aria-describedby="search-addon" />
+                    <input id="search" class="form-control mr-sm-2" type="search" name="search" value="{{searchTerm}}" placeholder="Search"
+                        aria-label="Search" aria-describedby="search-addon"/>
                     <button id="search-button" type="submit" class="btn btn-outline-dark">
                         <i class="bi bi-search"></i>
                     </button>

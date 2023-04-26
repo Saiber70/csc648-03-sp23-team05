@@ -10,7 +10,6 @@
 * application.
 *
 **************************************************************/
-
 var createError = require('http-errors');
 const express = require('express');
 var path = require('path');
@@ -23,6 +22,7 @@ var postRouter = require('./routes/posts');
 
 const app = express();
 
+// sets up our handlebars structure
 app.engine(
   "hbs",
   handlebars.engine({
