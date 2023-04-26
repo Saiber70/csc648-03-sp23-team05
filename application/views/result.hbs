@@ -1,12 +1,25 @@
 {{#if results.length}}
-<h3>{{results.length}} results found</h3>
+<h3>
+  <p class="text-center">{{results.length}} results found</p>
+</h3>
+
+<form action="/result" method="get">
+  <select class="form-control" id="filter" name="filter" value="{{filter}}" onchange="this.form.submit()">
+    <option selected>Sort By: </option>
+    <option value="Featured">Featured</option>
+    <option value="Low to High">Price: Low to High</option>
+    <option value="High to Low">Price: High to Low</option>
+  </select>
+</form>
+
 <div class="container">
   <div class="row">
     {{#each results}}
     <div class="col-4 mt-4">
       <div class="card bg-dark">
-        <a href="">
-        <img class="card-img-top" style="height:200px; object-fit:cover;" src={{this.image_path}} alt="Card image cap">
+        <a href="/selected">
+          <img class="card-img-top" style="height:200px; object-fit:cover;" src={{this.image_path}}
+            alt="Card image cap">
         </a>
         <div class="card-body text-white">
           <h5 class="card-title">{{this.restaurant_name}}</h5>
@@ -22,3 +35,51 @@
 {{else}}
 <h1>No results found</h1>
 {{/if}}
+
+<div id="map">
+</div>
+
+<!--* working maps api for test locations-->
+<script>
+    function initMap() {
+      // Map options
+      var options = {
+        zoom: 8,
+        center: { lat: 37.7749, lng: -122.4194 }
+        }
+        
+        // New map
+        var map = new google.maps.Map(document.getElementById('map'), options);
+
+        var markers = [
+        {{#each results}}
+        {
+        coords: { lat: {{ this.latitude }}, lng: {{ this.longitude }} },
+        content: '<h1>{{this.restaurant_name}}</h1>'
+        },
+        {{/each}}
+        ];
+        
+        for (let i = 0; i < markers.length; i++) {
+          addMarker(markers[i]);
+        }
+        
+        // Add the addMarker() function here
+        function addMarker(props) {
+          var marker = new google.maps.Marker({
+            position: props.coords,
+            map: map
+            });
+            
+            if (props.content) {
+              var infoWindow = new google.maps.InfoWindow({
+                content: props.content
+                });
+                
+                marker.addListener('click', function () {
+                  infoWindow.open(map, marker);
+                  });
+            }
+        }
+    }
+</script>

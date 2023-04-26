@@ -1,3 +1,15 @@
+/**************************************************************
+* Author: Mario Leyva Moreno
+*
+* File: app.js
+*
+* Description: The purpose of this file is to serve as the entry point
+* for our application. It sets up a web server to handle HTTP requests
+* and includes all the required node modules for our framework. It also exports
+* all of our routers and includes any necessary middleware functions for our
+* application.
+*
+**************************************************************/
 var createError = require('http-errors');
 const express = require('express');
 var path = require('path');
@@ -12,6 +24,7 @@ var postRouter = require('./routes/posts');
 
 const app = express();
 
+// sets up our handlebars structure
 app.engine(
   "hbs",
   handlebars.engine({
@@ -78,4 +91,4 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = app

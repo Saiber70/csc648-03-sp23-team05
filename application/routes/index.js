@@ -17,17 +17,23 @@ function search(req, res, next) {
     let searchTerm = req.query.search;
     // user's selected category
     let category = req.query.category;
-
-    req.session.searchTerm = searchTerm;
-    req.session.category = category;
-
+    let filter = req.query.filter;
     let query = 'SELECT * FROM Restaurant';
+
     if (searchTerm != '' && category != '') {
         query = `SELECT * FROM Restaurant WHERE restaurant_category = '` + category + `' AND restaurant_name LIKE '%` + searchTerm + `%'`;
     } else if (searchTerm != '' && category == '') {
         query = `SELECT * FROM Restaurant WHERE restaurant_name LIKE '%` + searchTerm + `%'`;
     } else if (searchTerm == '' && category != '') {
         query = `SELECT * FROM Restaurant WHERE restaurant_category = '` + category + `'`;
+    }
+
+    if(filter == 'Low to High') {
+        query = `SELECT * FROM Restaurant ORDER BY price_range`;
+    } else if(filter == 'High to Low') {
+        query = `SELECT * FROM Restaurant ORDER BY price_range DESC`;
+    } else if(filter == 'Featured') {
+        query = `SELECT * FROM Restaurant ORDER BY restaurant_id`;
     }
     
     db.query(query, (err, result) => {
@@ -53,6 +59,38 @@ router.get('/', function (req, res, next) {
 
 router.get('/index', (req, res, next) => {
     res.render('index', { title: 'Team Page' });
+});
+
+router.get('/login', (req, res, next) => {
+    res.render('login');
+});
+
+router.get('/register', (req, res, next) => {
+    res.render('register');
+});
+
+router.get('/checkout', (req, res, next) => {
+    res.render('checkout');
+});
+
+router.get('/register-driver', (req, res, next) => {
+    res.render('register_driver');
+});
+
+router.get('/register-restaurant', (req, res, next) => {
+    res.render('register_restaurant');
+});
+
+router.get('/upload', (req, res, next) => {
+    res.render('menu_upload');
+});
+
+router.get('/selected', (req, res, next) => {
+    res.render('selected_restaurant');
+});
+
+router.get('/orders', (req, res, next) => {
+    res.render('orders');
 });
 
 //http://localhost:3000/result?category=value&search=value
