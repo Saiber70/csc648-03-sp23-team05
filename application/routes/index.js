@@ -27,6 +27,7 @@ function search(req, res, next) {
     let searchTerm = req.query.search;
     // user's selected category
     let category = req.query.category;
+    let filter = req.query.filter;
     let query = 'SELECT * FROM Restaurant';
     if (searchTerm != '' && category != '') {
         query = `SELECT * FROM Restaurant WHERE restaurant_category = '` + category + `' AND restaurant_name LIKE '%` + searchTerm + `%'`;
@@ -34,6 +35,14 @@ function search(req, res, next) {
         query = `SELECT * FROM Restaurant WHERE restaurant_name LIKE '%` + searchTerm + `%'`;
     } else if (searchTerm == '' && category != '') {
         query = `SELECT * FROM Restaurant WHERE restaurant_category = '` + category + `'`;
+    }
+
+    if(filter == 'Low to High') {
+        query = `SELECT * FROM Restaurant ORDER BY price_range`;
+    } else if(filter == 'High to Low') {
+        query = `SELECT * FROM Restaurant ORDER BY price_range DESC`;
+    } else if(filter == 'Featured') {
+        query = `SELECT * FROM Restaurant`;
     }
     
     db.query(query, (err, result) => {

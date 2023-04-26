@@ -11,10 +11,10 @@
         var map = new google.maps.Map(document.getElementById('map'), options);
 
         var markers = [
-        {{ #each results }}
+        {{#each results}}
         {
         coords: { lat: { { this.latitude } }, lng: { { this.longitude } } },
-        content: '<h1>{{this.restaurant_name}}</h1><p>{{this.restaurant_address}}</p>'
+        content: '<h1>{{this.restaurant_name}}</h1>'
         },
         {{/each}}
         ];

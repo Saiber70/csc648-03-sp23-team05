@@ -1,14 +1,23 @@
 {{#if results.length}}
-<h3>{{results.length}} results found</h3>
-<div id="map">
-  
-</div>
+<h3>
+  <p class="text-center">{{results.length}} results found</p>
+</h3>
+
+<form action="/result" method="get">
+<label for="filter">Sort Results By:</label>
+  <select class="form-control" id="filter" name="filter" onchange="this.form.submit()">
+    <option value="Featured">Featured</option>
+    <option value="Low to High">Price: Low to High</option>
+    <option value="High to Low">Price: High to Low</option>
+  </select>
+</form>
+
 <div class="container">
   <div class="row">
     {{#each results}}
     <div class="col-4 mt-4">
       <div class="card bg-dark">
-        <a href="">
+        <a href="/selected">
           <img class="card-img-top" style="height:200px; object-fit:cover;" src={{this.image_path}}
             alt="Card image cap">
         </a>
@@ -26,3 +35,6 @@
 {{else}}
 <h1>No results found</h1>
 {{/if}}
+
+<div id="map">
+</div>

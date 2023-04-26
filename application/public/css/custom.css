@@ -117,6 +117,10 @@
   width: 100%;
 }
 
+#filter {
+  width:50%;
+}
+
 /*
 #login-form {
   padding-bottom:3rem; 
