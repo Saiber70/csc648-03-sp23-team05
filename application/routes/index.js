@@ -73,11 +73,11 @@ router.get('/checkout', (req, res, next) => {
     res.render('checkout');
 });
 
-router.get('/register-driver', (req, res, next) => {
+router.get('/register_driver', (req, res, next) => {
     res.render('register_driver');
 });
 
-router.get('/register-restaurant', (req, res, next) => {
+router.get('/register_restaurant', (req, res, next) => {
     res.render('register_restaurant');
 });
 
