@@ -71,6 +71,7 @@ app.use('/posts', postRouter);
 app.use(function (req, res, next) {
   res.locals.searchTerm = req.session.searchTerm;
   res.locals.category = req.session.category;
+  res.locals.filter = req.session.filter;
   next();
 });
 

@@ -17,7 +17,12 @@
   background-color: #7002c4;
   color: white;
   margin-top: auto;
-  padding: 5px;
+  padding: 7px;
+}
+
+#footer-button {
+  text-align: center;
+  color:white;
 }
 
 .bi.bi-cup-hot {
@@ -54,6 +59,7 @@
 
 .bg-image.container-fluid.border.text-center {
   background-image: url(https://images.rawpixel.com/image_1300/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3B4MTM2OTgxMy1pbWFnZS1rd3Z4eHA5MS5qcGc.jpg);
+  background-size: cover;
 }
 
 #home-row {
@@ -134,6 +140,42 @@
 #checkout-button {
   margin-top: 10px;
   width: 50%;
+}
+
+.jumbotron.jumbotron-fluid {
+  margin-bottom: 1rem;
+  background-color: black;
+}
+
+#banner-text {
+  text-align: center;
+  color:white;
+}
+
+.fas.fa-hamburger {
+  font-size: 36px;
+}
+
+.dropdown {
+  margin-top: 9px;
+  margin-left: 5px;
+}
+
+.btn.btn-secondary.dropdown-toggle {
+  background-color: black;
+}
+
+#about-jumbotron {
+  height:400px;
+  background-image: url(https://images.rawpixel.com/image_1300/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3AtMzA0LWppcjA1NzktY2hpbS5qcGc.jpg);
+  background-size: cover;
+}
+
+#about-text{
+  text-align: center;
+  color: white;
+  border: black;
+  margin-top: 100px;
 }
 
 /*
