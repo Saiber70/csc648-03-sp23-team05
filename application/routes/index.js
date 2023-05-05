@@ -2,6 +2,7 @@ var express = require('express');
 const router = express.Router();
 const db = require('../conf/database');
 
+
 // used to test connection to MYSQL database
 db.getConnection((err) => {
     if (err) {
@@ -32,6 +33,8 @@ function search(req, res, next) {
         query = `SELECT * FROM Restaurant ORDER BY price_range`;
     } else if (filter == 'High to Low') {
         query = `SELECT * FROM Restaurant ORDER BY price_range DESC`;
+    } else if (filter == 'Delivery Time') {
+        query = `SELECT * FROM Restaurant ORDER BY delivery_time`;
     } else if (filter == 'Featured') {
         query = `SELECT * FROM Restaurant ORDER BY restaurant_id`;
     }

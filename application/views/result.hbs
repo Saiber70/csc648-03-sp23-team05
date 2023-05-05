@@ -9,6 +9,7 @@
     <option value="Featured">Featured</option>
     <option value="Low to High">Price: Low to High</option>
     <option value="High to Low">Price: High to Low</option>
+    <option value="Delivery Time">Delivery Time</option>
   </select>
 </form>
 
@@ -23,9 +24,10 @@
         </a>
         <div class="card-body text-white">
           <h5 class="card-title">{{this.restaurant_name}}</h5>
-          <p class="card-text">Address:{{this.restaurant_address}}</p>
-          <p class="card-text">Price:{{this.price_range}}</p>
-          <p class="card-text">Category:{{this.restaurant_category}}</p>
+          <p class="card-text">Address: {{this.restaurant_address}}</p>
+          <p class="card-text">Price: {{this.price_range}}</p>
+          <p class="card-text">Expected Delivery Time: {{this.delivery_time}}</p>
+          <p class="card-text">Category: {{this.restaurant_category}}</p>
         </div>
       </div>
     </div>
