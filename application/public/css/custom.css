@@ -14,10 +14,12 @@
 }
 
 #footer {
+  bottom: 0%;
   background-color: #7002c4;
   color: white;
   margin-top: auto;
   padding: 7px;
+  position: relative;
 }
 
 #footer-button {
@@ -177,6 +179,18 @@
   border: black;
   margin-top: 100px;
 }
+
+.col-12.col-md-6.col-lg-4 {
+  padding-bottom: 15px;/* custom css to add spacing instead of gutters*/
+}
+
+#about-image {
+  height: 250px;
+  background: transparent no-repeat center;
+  background-size: cover;
+}
+
+
 
 /*
 #login-form {
