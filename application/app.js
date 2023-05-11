@@ -22,6 +22,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var postRouter = require('./routes/posts');
 
+var postRestaurantInfoRouter = require('./routes/post_restaurant_info')
+
 const app = express();
 
 // sets up our handlebars structure
@@ -67,6 +69,11 @@ app.use("/public", express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postRouter);
+
+
+// make the /register accessible from the userRouter
+app.use('/register', usersRouter);
+//app.use('/post_restaurant_info', postRestaurantInfoRouter);
 
 app.use(function (req, res, next) {
   res.locals.searchTerm = req.session.searchTerm;

@@ -10,19 +10,21 @@
 
 const mysql = require('mysql2');
 
+// const db = mysql.createPool({
+//     host: '127.0.0.1',
+//     user: 'team05',
+//     database: 'team05db',
+//     password: 'team05-csc648',
+//     port: '3306'
+// });
+
 const db = mysql.createPool({
     host: '127.0.0.1',
-    user: 'team05',
+    user: 'root',
     database: 'team05db',
-    password: 'team05-csc648',
+    password: 'a135b246',
     port: '3306'
 });
-
-module.exports = db;
-
-
-
-
 
 module.exports = db;
 

@@ -1,6 +1,6 @@
 var express = require('express');
 const router = express.Router();
-
+var db = require('../conf/database');
 
 // used to test connection to MYSQL database
 db.getConnection((err) => {
@@ -67,6 +67,8 @@ router.get('/login', (req, res, next) => {
     res.render('login');
 });
 
+// deleting this because the route for the register is
+// handled in the users.js file
 router.get('/register', (req, res, next) => {
     res.render('register');
 });
@@ -110,16 +112,16 @@ router.get('/result', search, function (req, res, next) {
     });
 });
 
-/** for the signup button */
-router.get('/dashboard', isLoggedIn, (req, res) => {
-    // render dashboard page
-  });
+// /** for the signup button */
+// router.get('/dashboard', isLoggedIn, (req, res) => {
+//     // render dashboard page
+//   });
   
-  function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-      return next();
-    }
-    res.redirect('/register');
-  }
+//   function isLoggedIn(req, res, next) {
+//     if (req.isAuthenticated()) {
+//       return next();
+//     }
+//     res.redirect('/register');
+//   }
 
 module.exports = router;
