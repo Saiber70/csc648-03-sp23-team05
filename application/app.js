@@ -25,6 +25,7 @@ var postRouter = require('./routes/posts');
 var postRestaurantInfoRouter = require('./routes/post_restaurant_info')
 
 const app = express();
+//const port = 3000;
 
 // sets up our handlebars structure
 app.engine(
@@ -71,8 +72,6 @@ app.use('/users', usersRouter);
 app.use('/posts', postRouter);
 
 
-// make the /register accessible from the userRouter
-app.use('/register', usersRouter);
 //app.use('/post_restaurant_info', postRestaurantInfoRouter);
 
 app.use(function (req, res, next) {

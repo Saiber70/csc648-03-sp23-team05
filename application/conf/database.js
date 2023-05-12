@@ -8,7 +8,8 @@
 **************************************************************/
 
 
-const mysql = require('mysql2');
+//const mysql = require('mysql2');
+//const mysql = require('mysql2/promise');
 
 // const db = mysql.createPool({
 //     host: '127.0.0.1',
@@ -17,14 +18,6 @@ const mysql = require('mysql2');
 //     password: 'team05-csc648',
 //     port: '3306'
 // });
-
-const db = mysql.createPool({
-    host: '127.0.0.1',
-    user: 'root',
-    database: 'team05db',
-    password: 'a135b246',
-    port: '3306'
-});
 
 module.exports = db;
 
