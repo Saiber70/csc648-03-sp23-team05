@@ -22,8 +22,6 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var postRouter = require('./routes/posts');
 
-var postRestaurantInfoRouter = require('./routes/post_restaurant_info')
-
 const app = express();
 //const port = 3000;
 
