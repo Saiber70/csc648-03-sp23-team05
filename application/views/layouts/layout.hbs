@@ -37,9 +37,6 @@
     crossorigin="anonymous"></script>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmqtDK6VhShU_U-oV8SrGI53wSluNA-wI&callback=initMap"></script>
-  {{#each js}}
-  <script defer type="text/javascript" src="/public/js/{{this}}"></script>
-  {{/each}}
 </head>
 
 <body>
@@ -49,6 +46,36 @@
     {{{body}}}
     {{> footer}}
   </div>
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            } else {
+              let password = document.getElementById('inputPassword').value;
+              let confirmPassword = document.getElementById('inputPasswordConfirm').value;
+              if (password !== confirmPassword) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                document.getElementById('CheckPasswordMatch').textContent = 'Password does not match!';
+              }
+            }
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+  </script>
 </body>
 
 </html>

@@ -53,7 +53,7 @@
 
             <div class="form-group">
                 <label for="password" class="form-label">Password*</label>
-                <input id="password" placeholder="Password" class="form-control" type="password" name="password"
+                <input placeholder="Password" class="form-control" id="inputPassword" type="password" name="password"
                     required pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[0-9])(?=.*[\-+!@#$^&*])[a-zA-Z0-9\-+!@#$^&*]{8,20}$"
                     minlength="8" maxlength="16">
                 <div class="invalid-feedback">
@@ -63,11 +63,11 @@
             </div>
 
             <div class="form-group">
-                <label for="re-password" class="form-label">Reenter Password*</label>
-                <input id="re-password" placeholder="Reenter Password" class="form-control" type="password"
-                    name="re_password" required
-                    pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[0-9])(?=.*[\-+!@#$^&*])[a-zA-Z0-9\-+!@#$^&*]{8,20}$">
-                <div class="invalid-feedback">
+                <label for="confirmpassword" class="form-label">Reenter Password*</label>
+                <input placeholder="Reenter Password" class="form-control" id="inputPasswordConfirm"
+                    data-match="#inputPassword" data-match-error="Password does not match" type="password"
+                    name="re_password" required>
+                <div class="invalid-feedback" id="CheckPasswordMatch">
                     Must confirm password.
                 </div>
             </div>
@@ -93,7 +93,9 @@
     </form>
 </div>
 
-<!--Script to prevent default form submission and enforce server-side validation-->
+
+
+<!--Script to prevent default form submission and enforce server-side validation
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
@@ -109,13 +111,21 @@
                     if (!form.checkValidity()) {
                         event.preventDefault()
                         event.stopPropagation()
+                    } else {
+                        let password = document.getElementById('inputPassword').value;
+                        let confirmPassword = document.getElementById('inputPasswordConfirm').value;
+                        if (password !== confirmPassword) {
+                            document.getElementById('CheckPasswordMatch').innerHTML = 'Password does not match!';
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
                     }
 
                     form.classList.add('was-validated')
                 }, false)
             })
     })()
-</script>
+</script>-->
 
 
 <!--<div class="container" style="margin-top:2rem;">
