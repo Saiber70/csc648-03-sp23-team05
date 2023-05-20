@@ -39,6 +39,7 @@
 {{/if}}
 
 <!--new map-->
+<!--
 <div id="map" style="height: 400px;"></div>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
@@ -55,20 +56,12 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 var marker = L.marker([latitude, longitude]).addTo(map);
-</script>
-
-
-
-
-
+</script>-->
 
 <div id="map">
 </div>
 
 <!--* working maps api for test locations-->
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmqtDK6VhShU_U-oV8SrGI53wSluNA-wI&callback=initMap"></script>--}}
-
 <script>
     function initMap() {
       // Map options

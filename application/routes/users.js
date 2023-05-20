@@ -10,14 +10,14 @@ var express = require('express');
 const router = express.Router();
 var db = require('../conf/database');
 const axios = require('axios');
-const bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
 
-router.get('/login', function(req, res, next) {
+router.get('/login', function (req, res, next) {
   res.render('login');
 });
 
@@ -25,9 +25,7 @@ router.get('/login', function(req, res, next) {
 
 
 
-/* driver user registration */ 
-
-
+/* driver user registration */
 
 router.post('/register_driver', (req, res, next) => {
   let firstname = req.body.firstname;
@@ -77,7 +75,7 @@ router.post('/register_driver', (req, res, next) => {
         res.redirect('/login');
       } else {
         throw new UserError(
-          "Registration Failed: Email already exists",
+          "Server Error, user could not be created",
           "/register",
           500
         );
@@ -90,13 +88,13 @@ router.post('/register_driver', (req, res, next) => {
 });
 
 
- /**
- * SFSU user registration
- * first block of code handles situation if the username entered is already exist
- * second block of code handles situation if the email entered is already exist
- * encrypt password
- * insert userinfo with hashed password
- */
+/**
+* SFSU user registration
+* first block of code handles situation if the username entered is already exist
+* second block of code handles situation if the email entered is already exist
+* encrypt password
+* insert userinfo with hashed password
+*/
 
 router.post('/register', (req, res, next) => {
   let username = req.body.username;
@@ -120,7 +118,7 @@ router.post('/register', (req, res, next) => {
       if (!userExists) {
         if (!emailExists) {
           // Hash the password
-          return bcrypt.hash(password, 10); 
+          return bcrypt.hash(password, 10);
         } else {
           throw new UserError(
             "Registration Failed: Email already exists",
@@ -148,7 +146,7 @@ router.post('/register', (req, res, next) => {
         res.redirect('/login');
       } else {
         throw new UserError(
-          "Registration Failed: Email already exists",
+          "Server Error, user could not be created",
           "/register",
           500
         );
@@ -159,8 +157,6 @@ router.post('/register', (req, res, next) => {
       // Handle error response
     });
 });
-
-
 
 
 
@@ -179,12 +175,12 @@ router.post('/register', (req, res, next) => {
 //   let zipCode = req.body.zipCode;
 //   let weekly_discounts = req.body.weekly_discounts === 'on' ? 1 : 0; // check if the checkbox is checked
 //   let free_delivery = req.body.free_delivery === 'on' ? 1 : 0; // check if the checkbox is checked
-  
+
 //   db.query("SELECT * FROM Restaurant WHERE restaurant_name = ?", [restaurant_name])
 //     .then(([results, fields]) => {
 //       restaurant_id_Exists = results.length > 0;
 //       restaurant_Exists = results.some(row => row.user_name === restaurant_name);
-      
+
 
 //       // user doesn't exist
 //       if (!restaurant_id_Exists) {
