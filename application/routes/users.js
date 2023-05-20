@@ -171,95 +171,95 @@ router.post('/register', (req, res, next) => {
  * Then, store it into the mysql database
  * *************************************************************************************
  * */
-router.post('/register-restaurant', async (req, res, next) => {
-  let restaurant_name = req.body.restaurant_name;
-  let restaurant_address = req.body.restaurant_address;
-  let city = req.body.city;
-  let state = req.body.state;
-  let country = req.body.country;
-  let zipCode = req.body.zipCode;
-  let weekly_discounts = req.body.weekly_discounts === 'on' ? 1 : 0; // check if the checkbox is checked
-  let free_delivery = req.body.free_delivery === 'on' ? 1 : 0; // check if the checkbox is checked
+// router.post('/register-restaurant', async (req, res, next) => {
+//   let restaurant_name = req.body.restaurant_name;
+//   let restaurant_address = req.body.restaurant_address;
+//   let city = req.body.city;
+//   let state = req.body.state;
+//   let country = req.body.country;
+//   let zipCode = req.body.zipCode;
+//   let weekly_discounts = req.body.weekly_discounts === 'on' ? 1 : 0; // check if the checkbox is checked
+//   let free_delivery = req.body.free_delivery === 'on' ? 1 : 0; // check if the checkbox is checked
   
-  db.query("SELECT * FROM Restaurant WHERE restaurant_name = ?", [restaurant_name])
-    .then(([results, fields]) => {
-      restaurant_id_Exists = results.length > 0;
-      restaurant_Exists = results.some(row => row.user_name === restaurant_name);
+//   db.query("SELECT * FROM Restaurant WHERE restaurant_name = ?", [restaurant_name])
+//     .then(([results, fields]) => {
+//       restaurant_id_Exists = results.length > 0;
+//       restaurant_Exists = results.some(row => row.user_name === restaurant_name);
       
 
-      // user doesn't exist
-      if (!restaurant_id_Exists) {
-        // email doesn't exist
-        if (!restaurant_Exists) {
-          // columns that should be updated after the user submit the form
-          // default value in the db is 0 will be set to 1 after form submission
-          let baseSQL = 'INSERT INTO SFSU_User (user_name, user_first_name, user_last_name, user_password, user_email, user_phone, active, created) VALUES (?,?,?,?,?,?,1, NOW())'; 
-          // information values that we are getting from the user for registration
-          return db.query(baseSQL, [username, firstname, lastname, password, email, phone]);
-        } else {
-          throw new UserError(
-            "Registration Failed: Email already exists",
-            "/register",
-            200,
-            { field: 'email' } // Pass additional field information
-          );
-        }
-      } else {
-        throw new UserError(
-"Registration Failed: Username already exists",
-          "/register",
-          200,
-          { field: 'username' } // Pass additional field information
-        );
-      }
-    })
-    .then(([results, fields]) => {
-      if (results && results.affectedRows) {
-        console.log("Registration Successful");
-        res.redirect('/login');
-      } else {
-        throw new UserError(
-          "Registration Failed: Email already exists",
-          "/register",
-          500
-        );
-      }
-    })
-    .catch(error => {
-      console.error(error);
-      // Handle error response
-    });
+//       // user doesn't exist
+//       if (!restaurant_id_Exists) {
+//         // email doesn't exist
+//         if (!restaurant_Exists) {
+//           // columns that should be updated after the user submit the form
+//           // default value in the db is 0 will be set to 1 after form submission
+//           let baseSQL = 'INSERT INTO SFSU_User (user_name, user_first_name, user_last_name, user_password, user_email, user_phone, active, created) VALUES (?,?,?,?,?,?,1, NOW())'; 
+//           // information values that we are getting from the user for registration
+//           return db.query(baseSQL, [username, firstname, lastname, password, email, phone]);
+//         } else {
+//           throw new UserError(
+//             "Registration Failed: Email already exists",
+//             "/register",
+//             200,
+//             { field: 'email' } // Pass additional field information
+//           );
+//         }
+//       } else {
+//         throw new UserError(
+// "Registration Failed: Username already exists",
+//           "/register",
+//           200,
+//           { field: 'username' } // Pass additional field information
+//         );
+//       }
+//     })
+//     .then(([results, fields]) => {
+//       if (results && results.affectedRows) {
+//         console.log("Registration Successful");
+//         res.redirect('/login');
+//       } else {
+//         throw new UserError(
+//           "Registration Failed: Email already exists",
+//           "/register",
+//           500
+//         );
+//       }
+//     })
+//     .catch(error => {
+//       console.error(error);
+//       // Handle error response
+//     });
 
-  // check if the restaurant name already exists
-  const db = await mysql.createConnection(db);
-  const [results, fields] = await db.execute("SELECT * FROM Restaurant WHERE restaurant_name=?", [restaurant_name]);
-  if(results && results.length == 0){
-    const [insertResults, insertFields] = await db.execute("INSERT INTO Restaurant (restaurant_name, restaurant_address, city, state, country, zip_code, weekly_discounts, free_delivery, latitude, longitude) VALUES (?,?,?,?,?,?,?,?,?,?);", [restaurant_name, restaurant_address, city, state, country, zipCode, weekly_discounts, free_delivery, latitude, longitude]);
-    if(insertResults && insertResults.affectedRows){
-      res.status(200).send("Registration Successful");
-    } else{
-      throw new UserError(
-        "Registration Failed: Unable to register the restaurant",
-        "/register", // html needs to be changed to hb
-        500
-      );
-    }
-  } else{
-    throw new UserError(
-      "Registration Failed: Restaurant Name already exists",
-      "/register", // html needs to be changed to hb
-      200
-    );
-  }
+//   // check if the restaurant name already exists
+//   const db = await mysql.createConnection(db);
+//   const [results, fields] = await db.execute("SELECT * FROM Restaurant WHERE restaurant_name=?", [restaurant_name]);
+//   if(results && results.length == 0){
+//     const [insertResults, insertFields] = await db.execute("INSERT INTO Restaurant (restaurant_name, restaurant_address, city, state, country, zip_code, weekly_discounts, free_delivery, latitude, longitude) VALUES (?,?,?,?,?,?,?,?,?,?);", [restaurant_name, restaurant_address, city, state, country, zipCode, weekly_discounts, free_delivery, latitude, longitude]);
+//     if(insertResults && insertResults.affectedRows){
+//       res.status(200).send("Registration Successful");
+//     } else{
+//       throw new UserError(
+//         "Registration Failed: Unable to register the restaurant",
+//         "/register", // html needs to be changed to hb
+//         500
+//       );
+//     }
+//   } else{
+//     throw new UserError(
+//       "Registration Failed: Restaurant Name already exists",
+//       "/register", // html needs to be changed to hb
+//       200
+//     );
+//   }
 
-//still need to do the log in server side
-//you should never expose certain types of error in the front end
+// //still need to do the log in server side
+// //you should never expose certain types of error in the front end
 
-// Usage example
-const userAddress = '123 Main St, City, State'; // Replace with user input address
-storeAddressWithCoordinates(userAddress)
-  .catch(error => {
-    // Handle the error
-  });
-});
+// // Usage example
+// const userAddress = '123 Main St, City, State'; // Replace with user input address
+// storeAddressWithCoordinates(userAddress)
+//   .catch(error => {
+//     // Handle the error
+//   });
+// });
 module.exports = router;
