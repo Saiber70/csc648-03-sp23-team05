@@ -1,73 +1,68 @@
 <!--start of navigation bar-->
-<ul class="container-fluid border">
-    <ul class="row">
-    
-        <div class="col">
-            <div class="row align-items-center">
-                <nav class="navbar navbar-light ">
-                    <a class="navbar-brand" href="/">
-                        <h4> <i class="bi bi-cup-hot"> Hungry Gator</i> </h4>
-                    </a>
-               </nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <h4>
+      <i class="bi bi-cup-hot"> Hungry Gator</i>
+      </h4>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse " id="navbarNavDropdown">
+      <div class="col-lg-9">
+        <form action="/result" method="get" target="_blank">
+          <div class="input-group">
+            <select id="category" class="form-select" name="category" value="{{category}}">
+              <option selected value="">All Categories</option>
+              <option value="American">American</option>
+              <option value="Mexican">Mexican</option>
+              <option value="Asian">Asian</option>
+              <option value="Italian">Italian</option>
+            </select>
+            <input id="search" class="form-control mr-sm-2" type="search" name="search" value="{{searchTerm}}"
+                   placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <button id="search-button" type="submit" class="btn btn-outline-dark">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-lg-4">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item ">
+            <a class="nav-link" href="#">About Us <span class="sr-only">(current)</span></a>
+          </li>
+
+          <li class="nav-item">
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sign In
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <a class="dropdown-item" href="/login" target="_blank">SFSU Users</a>
+                <a class="dropdown-item" href="">Drivers</a>
+                <a class="dropdown-item " href="">Restaurant Owners</a>
+              </div>
             </div>
-        </div>
+          </li>
 
-        <div class="col">
-            <div class="row align-items-center">
-                <button class="btn btn-outline-dark">
-                    <a id="footer-button" href="/about" target="_blank">About Us</a>
-                </button>
+          <li class="nav-item">
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sign Up
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <a class="dropdown-item" href="/register" target="_blank">SFSU Users</a>
+                <a class="dropdown-item" href="/register_driver" target="_blank">Drivers</a>
+                <a class="dropdown-item" href="/register_restaurant" target="_blank">Restaurant Owners</a>
+              </div>
             </div>
-        </div>
-
-        <div class="col-7">
-            <form action="/result" method="get" target="_blank">
-                <div class="input-group">
-                    <select id="category" class="form-select" name="category" value="{{category}}">
-                        <option selected value="">All Categories</option>
-                        <option value="American">American</option>
-                        <option value="Mexican">Mexican</option>
-                        <option value="Asian">Asian</option>
-                        <option value="Italian">Italian</option>
-                    </select>
-                    <input id="search" class="form-control mr-sm-2" type="search" name="search" value="{{searchTerm}}"
-                        placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                    <button id="search-button" type="submit" class="btn btn-outline-dark">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <div class="col">
-            <div class="row align-items-center">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sign In
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <a class="dropdown-item" href="/login" target="_blank">SFSU Users</a>
-                        <a class="dropdown-item" href="">Drivers</a>
-                        <a class="dropdown-item " href="">Restaurant Owners</a>
-                    </div>
-                </div>
-
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sign Up
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <a class="dropdown-item" href="/register" target="_blank">SFSU Users</a>
-                        <a class="dropdown-item" href="/register_driver" target="_blank">Drivers</a>
-                        <a class="dropdown-item" href="/register_restaurant" target="_blank">Restaurant Owners</a>
-                    </div>
-                </div>
-                <!--<a id="sign-in-button" class="btn btn-outline-dark" href="/login">Sign In</a>
-                <a id="sign-up-button" class="btn btn-outline-dark" href="/register">Sign Up</a>-->
-            </div>
-        </div>
-    </ul>
-</ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
 <!--end of navigation bar-->
