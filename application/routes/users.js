@@ -257,4 +257,128 @@ router.post('/register', (req, res, next) => {
 //     // Handle the error
 //   });
 // });
+
+/**
+ * this block is for User Login
+ */
+
+router.post('/login', (req, res, next) => {
+  //let username = req.body.username;
+  let password = req.body.password;
+  let email = req.body.email;
+
+  // check if username already exists
+  // check if username and email already exist
+  //let userNotExists;
+  //let emailNotExists;
+
+
+  let baseSQL = 'INSERT INTO SFSU_User (user_name, user_first_name, user_last_name, user_password, user_email, user_phone, active, created) VALUES (?,?,?,?,?,?,1, NOW())';
+      return db.execute(baseSQL, [username, firstname, lastname, hashedPassword, email, phone]);
+
+  db.query("SELECT * FROM SFSU_User WHERE user_name = ? OR user_email = ?", [username, email])
+    .then(([results, fields]) => {
+      userExists = results.length > 0;
+      usernameExists = results.some(row => row.user_name === username);
+      emailExists = results.some(row => row.user_email === email);
+      
+
+      if (!userExists) {
+        if (!emailExists) {
+          // Hash the password
+          return bcrypt.hash(password, 10); 
+        } else {
+          throw new UserError(
+            "Registration Failed: Email already exists",
+            "/register",
+            200,
+            { field: 'email' }
+          );
+        }
+      } else {
+        throw new UserError(
+          "Registration Failed: Username already exists",
+          "/register",
+          200,
+          { field: 'username' }
+        );
+      }
+    })
+    .then((hashedPassword) => {
+      let baseSQL = 'INSERT INTO SFSU_User (user_name, user_first_name, user_last_name, user_password, user_email, user_phone, active, created) VALUES (?,?,?,?,?,?,1, NOW())';
+      return db.execute(baseSQL, [username, firstname, lastname, hashedPassword, email, phone]);
+    })
+    .then(([results, fields]) => {
+      if (results && results.affectedRows) {
+        console.log("Registration Successful");
+        res.redirect('/login');
+      } else {
+        throw new UserError(
+          "Registration Failed: Email already exists",
+          "/register",
+          500
+        );
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      // Handle error response
+    });
+});
+
+
+
+router.post('/login', (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  // Check the first user table (e.g., SFSU_User)
+  db.query("SELECT * FROM SFSU_User WHERE user_email = ? AND user_password = ?", [email, password])
+    .then(([results, fields]) => {
+      if (results && results.length > 0) {
+        // User found in the first table
+        // Perform the necessary actions for successful login
+        res.redirect('/dashboard');
+        return;
+      }
+
+      // Check the second user table (e.g., Another_User_Table)
+      return db.query("SELECT * FROM Driver_User WHERE user_email = ? AND user_password = ?", [email, password]);
+    })
+    .then(([results, fields]) => {
+      if (results && results.length > 0) {
+        // User found in the second table
+        // Perform the necessary actions for successful login
+        res.redirect('/dashboard');
+        return;
+      }
+      // uncomment the following when we complete the registration for the restaurant
+    //   // Check the third user table (e.g., Third_User_Table)
+    //   return db.query("SELECT * FROM Restaurant WHERE email = ? AND password = ?", [email, password]);
+    // })
+    // .then(([results, fields]) => {
+    //   if (results.length > 0) {
+    //     // User found in the third table
+    //     // Perform the necessary actions for successful login
+    //     res.redirect('/dashboard');
+    //     return;
+    //   }
+
+      // No user found in any table
+      throw new UserError(
+        "Invalid email or password",
+        "/login",
+        200
+      );
+    })
+    .catch(error => {
+      console.error(error);
+      // Handle error response
+    });
+});
+
+
+
+
+
 module.exports = router;
