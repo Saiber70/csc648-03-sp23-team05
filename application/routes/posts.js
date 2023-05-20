@@ -12,6 +12,8 @@
 **************************************************************/
 
 
+
+
 var express = require('express');
 const router = express.Router();
 var db = require('../conf/database');
@@ -60,7 +62,10 @@ router.post('/', upload.single('image'), (req, res) => {
         });
 });
 
-
-
-
 module.exports = router;
+
+/***
+ * change the database configuration to mysql2 when you use above
+ */
+
+

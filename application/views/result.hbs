@@ -38,15 +38,39 @@
 <h1>No results found</h1>
 {{/if}}
 
+<!--new map-->
+<div id="map" style="height: 400px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script> // this initialize the map using  Leaflet
+  // Replace latitude and longitude with the values from your geocoding API response
+var latitude = 37.7749;
+var longitude = -122.4194;
 
+var map = L.map('map').setView([latitude, longitude], 12); // Set the initial center and zoom level of the map
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+  maxZoom: 18
+}).addTo(map);
+
+var marker = L.marker([latitude, longitude]).addTo(map);
+</script>
+
+
+
+
+
+
+<!--
 <div id="map">
 </div>
 
 <!--* working maps api for test locations-->
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmqtDK6VhShU_U-oV8SrGI53wSluNA-wI&callback=initMap"></script>
+{{!--<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmqtDK6VhShU_U-oV8SrGI53wSluNA-wI&callback=initMap"></script>--}}
 
-<script>
+{{!-- <script>
     function initMap() {
       // Map options
       var options = {
@@ -92,4 +116,6 @@
         }   
     }
     
-</script>
+</script> --}}
+<!--new map-->
+    

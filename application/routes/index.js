@@ -1,3 +1,11 @@
+/**************************************************************
+* Author: Mario Leyva Moreno and Hajime Miyazaki
+*
+* File: database.js
+*
+* Description: The purpose of this file is to set up a connection to our mysql database.
+*
+**************************************************************/
 var express = require('express');
 const router = express.Router();
 var db = require('../conf/database');
@@ -12,48 +20,118 @@ db.getConnection((err) => {
 });
 
 // function to search the back-end
+// function search(req, res, next) {
+//     // user's search term
+//     let searchTerm = req.query.search;
+//     // user's selected category
+//     let category = req.query.category;
+//     let filter = req.query.filter;
+//     let query = 'SELECT * FROM Restaurant';
+
+//     if (searchTerm != '' && category != '') {
+//         query = `SELECT * FROM Restaurant WHERE restaurant_category = '` + category + `' AND restaurant_name LIKE '%` + searchTerm + `%'`;
+//     } else if (searchTerm != '' && category == '') {
+//         query = `SELECT * FROM Restaurant WHERE restaurant_name LIKE '%` + searchTerm + `%'`;
+//     } else if (searchTerm == '' && category != '') {
+//         query = `SELECT * FROM Restaurant WHERE restaurant_category = '` + category + `'`;
+//     }
+
+//     if (filter == 'Low to High') {
+//         query = `SELECT * FROM Restaurant ORDER BY price_range`;
+//     } else if (filter == 'High to Low') {
+//         query = `SELECT * FROM Restaurant ORDER BY price_range DESC`;
+//     } else if (filter == 'Delivery Time') {
+//         query = `SELECT * FROM Restaurant ORDER BY delivery_time`;
+//     } else if (filter == 'Featured') {
+//         query = `SELECT * FROM Restaurant ORDER BY restaurant_id`;
+//     }
+
+//     db.query(query, (err, result) => {
+//         if (err) {
+//             req.searchResult = [];
+//             req.searchTerm = "";
+//             req.category = "";
+//             next();
+//         }
+
+//         req.searchResult = result;
+//         req.searchTerm = searchTerm;
+//         req.category = category;
+
+//         next();
+//     });
+// }
 function search(req, res, next) {
-    // user's search term
     let searchTerm = req.query.search;
-    // user's selected category
     let category = req.query.category;
     let filter = req.query.filter;
     let query = 'SELECT * FROM Restaurant';
 
     if (searchTerm != '' && category != '') {
-        query = `SELECT * FROM Restaurant WHERE restaurant_category = '` + category + `' AND restaurant_name LIKE '%` + searchTerm + `%'`;
+        query = `SELECT * FROM Restaurant WHERE restaurant_category = ? AND restaurant_name LIKE ?`;
+        db.execute(query, [category, `%${searchTerm}%`])
+            .then(([result, fields]) => {
+                req.searchResult = result;
+                req.searchTerm = searchTerm;
+                req.category = category;
+                next();
+            })
+            .catch(err => {
+                req.searchResult = [];
+                req.searchTerm = '';
+                req.category = '';
+                console.error(err);
+                next();
+            });
     } else if (searchTerm != '' && category == '') {
-        query = `SELECT * FROM Restaurant WHERE restaurant_name LIKE '%` + searchTerm + `%'`;
+        query = `SELECT * FROM Restaurant WHERE restaurant_name LIKE ?`;
+        db.execute(query, [`%${searchTerm}%`])
+            .then(([result, fields]) => {
+                req.searchResult = result;
+                req.searchTerm = searchTerm;
+                req.category = category;
+                next();
+            })
+            .catch(err => {
+                req.searchResult = [];
+                req.searchTerm = '';
+                req.category = '';
+                console.error(err);
+                next();
+            });
     } else if (searchTerm == '' && category != '') {
-        query = `SELECT * FROM Restaurant WHERE restaurant_category = '` + category + `'`;
+        query = `SELECT * FROM Restaurant WHERE restaurant_category = ?`;
+        db.execute(query, [category])
+            .then(([result, fields]) => {
+                req.searchResult = result;
+                req.searchTerm = searchTerm;
+                req.category = category;
+                next();
+            })
+            .catch(err => {
+                req.searchResult = [];
+                req.searchTerm = '';
+                req.category = '';
+                console.error(err);
+                next();
+            });
+    } else {
+        db.execute(query)
+            .then(([result, fields]) => {
+                req.searchResult = result;
+                req.searchTerm = searchTerm;
+                req.category = category;
+                next();
+            })
+            .catch(err => {
+                req.searchResult = [];
+                req.searchTerm = '';
+                req.category = '';
+                console.error(err);
+                next();
+            });
     }
-
-    if (filter == 'Low to High') {
-        query = `SELECT * FROM Restaurant ORDER BY price_range`;
-    } else if (filter == 'High to Low') {
-        query = `SELECT * FROM Restaurant ORDER BY price_range DESC`;
-    } else if (filter == 'Delivery Time') {
-        query = `SELECT * FROM Restaurant ORDER BY delivery_time`;
-    } else if (filter == 'Featured') {
-        query = `SELECT * FROM Restaurant ORDER BY restaurant_id`;
-    }
-
-    db.query(query, (err, result) => {
-        if (err) {
-            req.searchResult = [];
-            req.searchTerm = "";
-            req.category = "";
-            next();
-        }
-
-        req.searchResult = result;
-        req.searchTerm = searchTerm;
-        req.category = category;
-
-        next();
-    });
 }
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.render('home', { title: 'Home Page' });
