@@ -10,6 +10,7 @@ var express = require('express');
 const router = express.Router();
 var db = require('../conf/database');
 const axios = require('axios');
+const bcrypt = require('bcrypt');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -25,124 +26,50 @@ router.get('/login', function(req, res, next) {
 
 
 /* driver user registration */ 
-router.post('/register_driver', (req, res, next) =>{
-    let firstname = req.body.firstname; // username should be matched name attribute in the frontend
-    let lastname = req.body.lastname;
-    let username = req.body.username;
-    let email = req.body.email; // email
-    let phone = req.body.phone;
-    let vehicle = req.body.vehicle; // password comfirmation 
-    let license_number = req.body.license_number;
-    let password = req.body.password; // password should be matched name attribute in the frontend
-    let availableTime = req.body.availableTime;
-    
-    
-  // check if username already exists
+
+
+
+router.post('/register_driver', (req, res, next) => {
+  let firstname = req.body.firstname;
+  let lastname = req.body.lastname;
+  let username = req.body.username;
+  let email = req.body.email;
+  let phone = req.body.phone;
+  let vehicle = req.body.vehicle;
+  let license_number = req.body.license_number;
+  let password = req.body.password;
+  let availableTime = req.body.availableTime;
 
   let userExists, emailExists;
   db.query("SELECT * FROM Driver_User WHERE user_name = ? OR user_email = ?", [username, email])
-  .then(([results, fields]) => {
-    userExists = results.length > 0;
-    usernameExists = results.some(row => row.user_name === username);
-    emailExists = results.some(row => row.user_email === email);
-
-    // user doesn't exist
-    if (!userExists) {
-      // email doesn't exist
-      if (!emailExists) {
-        // columns that should be updated after the user submit the form
-        // default value in the db is 0 will be set to 1 after form submission
-        let baseSQL = 'INSERT INTO Driver_User (user_name, user_first_name, user_last_name, user_email, user_phone, vehicle, license_number, user_password, available_time, active, created) VALUES (?,?,?,?,?,?,?,?,?,1, NOW())'; 
-    // information values that we are getting from the user for registration
-    return db.query(baseSQL, [firstname, lastname, username, email, phone, vehicle, license_number, password, availableTime]);
-      } else {
-        throw new UserError(
-          "Registration Failed: Email already exists",
-          "/register",
-          200,
-          { field: 'email' } // Pass additional field information
-        );
-      }
-    } else {
-      throw new UserError(
-"Registration Failed: Username already exists",
-        "/register",
-        200,
-        { field: 'username' } // Pass additional field information
-      );
-    }
-  })
-  .then(([results, fields]) => {
-    if (results && results.affectedRows) {
-      console.log("Registration Successful");
-      res.redirect('/login');
-    } else {
-      throw new UserError(
-        "Registration Failed: Email already exists",
-        "/register",
-        500
-      );
-    }
-  })
-  .catch(error => {
-    console.error(error);
-    // Handle error response
-  });
-});
-
- /**
- * SFSU user registration
- * first block of code handles situation if the username entered is already exist
- * second block of code handles situation if the email entered is already exist
- */
-
-//const execute = db.promise().execute.bind(db.promise());
-
-router.post('/register', (req, res, next) => {
-  let username = req.body.username;
-  let firstname = req.body.firstname;
-  let lastname = req.body.lastname;
-  let password = req.body.password;
-  let re_password = req.body.re_password;
-  let phone = req.body.phone;
-  let email = req.body.email;
-
-  // server side validation
-  // check if username already exists
-  // check if username and email already exist
-  let userExists, emailExists;
-
-  db.query("SELECT * FROM SFSU_User WHERE user_name = ? OR user_email = ?", [username, email])
     .then(([results, fields]) => {
       userExists = results.length > 0;
       usernameExists = results.some(row => row.user_name === username);
       emailExists = results.some(row => row.user_email === email);
 
-      // user doesn't exist
       if (!userExists) {
-        // email doesn't exist
         if (!emailExists) {
-          // columns that should be updated after the user submit the form
-          // default value in the db is 0 will be set to 1 after form submission
-          let baseSQL = 'INSERT INTO SFSU_User (user_name, user_first_name, user_last_name, user_password, user_email, user_phone, active, created) VALUES (?,?,?,?,?,?,1, NOW())'; 
-          // information values that we are getting from the user for registration
-          return db.execute(baseSQL, [username, firstname, lastname, password, email, phone]);
+          return bcrypt.hash(password, 10); // Hash the password
         } else {
           throw new UserError(
             "Registration Failed: Email already exists",
             "/register",
             200,
-            { field: 'email' } // Pass additional field information
+            { field: 'email' }
           );
         }
       } else {
         throw new UserError(
-"Registration Failed: Username already exists",
+          "Registration Failed: Username already exists",
           "/register",
           200,
-          { field: 'username' } // Pass additional field information
+          { field: 'username' }
         );
       }
+    })
+    .then((hashedPassword) => {
+      let baseSQL = 'INSERT INTO Driver_User (user_name, user_first_name, user_last_name, user_email, user_phone, vehicle, license_number, user_password, available_time, active, created) VALUES (?,?,?,?,?,?,?,?,?,1, NOW())';
+      return db.query(baseSQL, [username, firstname, lastname, email, phone, vehicle, license_number, hashedPassword, availableTime]);
     })
     .then(([results, fields]) => {
       if (results && results.affectedRows) {
@@ -161,6 +88,78 @@ router.post('/register', (req, res, next) => {
       // Handle error response
     });
 });
+
+
+ /**
+ * SFSU user registration
+ * first block of code handles situation if the username entered is already exist
+ * second block of code handles situation if the email entered is already exist
+ * encrypt password
+ * insert userinfo with hashed password
+ */
+
+router.post('/register', (req, res, next) => {
+  let username = req.body.username;
+  let firstname = req.body.firstname;
+  let lastname = req.body.lastname;
+  let password = req.body.password;
+  let re_password = req.body.re_password;
+  let phone = req.body.phone;
+  let email = req.body.email;
+
+  // check if username already exists
+  // check if username and email already exist
+  let userExists, emailExists;
+
+  db.query("SELECT * FROM SFSU_User WHERE user_name = ? OR user_email = ?", [username, email])
+    .then(([results, fields]) => {
+      userExists = results.length > 0;
+      usernameExists = results.some(row => row.user_name === username);
+      emailExists = results.some(row => row.user_email === email);
+
+      if (!userExists) {
+        if (!emailExists) {
+          // Hash the password
+          return bcrypt.hash(password, 10); 
+        } else {
+          throw new UserError(
+            "Registration Failed: Email already exists",
+            "/register",
+            200,
+            { field: 'email' }
+          );
+        }
+      } else {
+        throw new UserError(
+          "Registration Failed: Username already exists",
+          "/register",
+          200,
+          { field: 'username' }
+        );
+      }
+    })
+    .then((hashedPassword) => {
+      let baseSQL = 'INSERT INTO SFSU_User (user_name, user_first_name, user_last_name, user_password, user_email, user_phone, active, created) VALUES (?,?,?,?,?,?,1, NOW())';
+      return db.execute(baseSQL, [username, firstname, lastname, hashedPassword, email, phone]);
+    })
+    .then(([results, fields]) => {
+      if (results && results.affectedRows) {
+        console.log("Registration Successful");
+        res.redirect('/login');
+      } else {
+        throw new UserError(
+          "Registration Failed: Email already exists",
+          "/register",
+          500
+        );
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      // Handle error response
+    });
+});
+
 
 
 
