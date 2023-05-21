@@ -10,7 +10,17 @@ var express = require('express');
 const router = express.Router();
 var db = require('../conf/database');
 
+
+db.getConnection((err) => {
+    if (err) {
+        throw err;
+    }
+    console.log('MySql Connected!');
+    db.query('USE teamdb');
+});
+
 // used to test connection to MYSQL database
+/*
 db.getConnection((err) => {
     if (err) {
         throw err;
@@ -18,6 +28,7 @@ db.getConnection((err) => {
     console.log('MySql Connected!');
     db.query('USE team05db');
 });
+*/
 
 // function to search the back-end
 // function search(req, res, next) {
@@ -177,6 +188,10 @@ router.get('/orders', (req, res, next) => {
 
 router.get('/about', (req, res, next) => {
     res.render('about');
+});
+
+router.get('/reset_password', (req, res, next) => {
+    res.render('reset_password');
 });
 
 //http://localhost:3000/result?category=value&search=value
