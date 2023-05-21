@@ -190,6 +190,12 @@
   background-size: cover;
 }
 
+.btn.btn-primary {
+  color:white;
+  background-color: purple;
+  border-color: white;
+}
+
 
 
 /*

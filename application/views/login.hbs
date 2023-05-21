@@ -1,33 +1,36 @@
 <!--- start of form login --->
-<div class="login-container">
-
-  <!-- start of form--->
-  <form id="login-form" class="justify-content-md-center">
-    <!-- <div class="shadow p-6 mb-5 bg-white rounded">--->
+<div class="container" style="margin-top:2rem;">
+  <div class="shadow p-3 mb-5 bg-white rounded">
     <div class="row justify-content-md-center">
       <h2>Login</h2>
     </div>
-    <div class="row justify-content-md-center">
-      <div class="col col-md-5" id="name">
-        <label id="login-email">Email</br></label>
-        <input type="email" class="form-control mr-sm-2" type="text" name="email">
-        <label id="login-password">Password</br></label>
-        <input type="password" class="form-control mr-sm-2" type="text" name="password">
+
+    <form id="login-form" class="justify-content-md-center">
+      <div class="form-group">
+        <label for="login-email">Email</label>
+        <input type="email" name="email" class="form-control" placeholder="Enter email" required>
       </div>
+
+      <div class="form-group">
+        <label for="login-password">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+      </div>
+  </div>
+
+  <div class="d-flex justify-content-center" style="margin-bottom:2rem">
+    <div class="col col-md-4">
+      <a href="...">
+        <p>FORGOT PASSWORD?</p>
+      </a>
+      <p>Do not have an account?:
+      <ul>
+        <li><a href="/register" target="_blank">Register here for SFSU users!</a></li>
+        <li><a href="/register_driver" target="_blank">Register here for delivery drivers!</a></li>
+        <li><a href="/register_restaurant" target="_blank">Restaurant Owners? Register here!</a></li>
+      </ul>
+      </p>
     </div>
-    <!-- </div>-->
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+  </div>
   </form>
-  <!-- end of form -->
-
-  <!-- start of buttons--->
-    <div class="d-flex justify-content-center" style="margin-bottom:2rem">
-        <div class="col col-md-4">
-        <p href="....">FORGOT PASSWORD?</p>
-        <p>Do not have an account?<a href="/register" target="_blank">Register here</a></p>
-        </div>
-        <button type="button" class="btn btn-outline-dark" style="margin:1rem"href="....">Sign In</button>
-    </div>
-    <!--- end of buttons-->
-
-  <!-- </div>-->
 </div>
