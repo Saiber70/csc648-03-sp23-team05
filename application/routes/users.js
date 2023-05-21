@@ -11,6 +11,8 @@ const router = express.Router();
 var db = require('../conf/database');
 const axios = require('axios');
 var bcrypt = require('bcrypt');
+const UserError = require('../helpers/error/UserError');
+const { errorPrint, successPrint } = require("../helpers/debug/debugprinters");
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -52,16 +54,16 @@ router.post('/register_driver', (req, res, next) => {
           throw new UserError(
             "Registration Failed: Email already exists",
             "/register",
-            200,
-            { field: 'email' }
+            200
+            //{ field: 'email' }
           );
         }
       } else {
         throw new UserError(
           "Registration Failed: Username already exists",
           "/register",
-          200,
-          { field: 'username' }
+          200
+          //{ field: 'username' }
         );
       }
     })
@@ -123,16 +125,16 @@ router.post('/register', (req, res, next) => {
           throw new UserError(
             "Registration Failed: Email already exists",
             "/register",
-            200,
-            { field: 'email' }
+            200
+            //{ field: 'email' }
           );
         }
       } else {
         throw new UserError(
           "Registration Failed: Username already exists",
           "/register",
-          200,
-          { field: 'username' }
+          200
+          //{ field: 'username' }
         );
       }
     })
@@ -262,6 +264,7 @@ router.post('/register', (req, res, next) => {
  * this block is for User Login
  */
 
+/*
 router.post('/login', (req, res, next) => {
   //let username = req.body.username;
   let password = req.body.password;
@@ -325,44 +328,140 @@ router.post('/login', (req, res, next) => {
       // Handle error response
     });
 });
+*/
+
+router.post('/login', async (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  // Using async/await to handle promises and errors using try/catch blocks
+  try {
+    // Check the first user table (e.g., SFSU_User)
+    const sfsu_user_baseSQL = "SELECT user_email, user_password FROM SFSU_User WHERE user_email=? AND user_password=?;";
+    const [sfsuResults] = await db.execute(sfsu_user_baseSQL, [email, password]);
+
+    if (sfsuResults.length === 1) {
+      successPrint(`SFSU User is logged in!`);
+      return res.redirect('/');
+    }
+    
+    // Check the second user table (e.g., Driver_User)
+    const driver_user_baseSQL = "SELECT user_email, user_password FROM Driver_User WHERE user_email=? AND user_password=?;";
+    const [driverResults] = await db.execute(driver_user_baseSQL, [email, password]);
+
+    if (driverResults.length === 1) {
+      successPrint(`Driver is logged in!`);
+      return res.redirect('/orders');
+    }
+
+    throw new UserError("Invalid email and/or password!", "/login", 200);
+  } catch (err) {
+    errorPrint("User login failed");
+
+    if (err instanceof UserError) {
+      errorPrint(err.getMessage());
+      res.status(err.getStatus());
+      return res.redirect('/login');
+    }
+    next(err);
+  }
+});
 
 
 
+
+/*
 router.post('/login', (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
   // Check the first user table (e.g., SFSU_User)
+  let sfsu_user_baseSQL = "SELECT user_email, user_password FROM SFSU_User WHERE user_email=? AND user_password=?;"
+  db.execute(sfsu_user_baseSQL, [email, password])
+    .then(([results, fields]) => {
+      if (results && results.length == 1) {
+        successPrint(`SFSU User is logged in!`);
+        res.redirect('/');
+      } else {
+        // Check the second user table (e.g., SFSU_User)
+        let driver_user_baseSQL = "SELECT user_email, user_password FROM Driver_User WHERE user_email=? AND user_password=?;"
+        db.execute(driver_user_baseSQL, [email, password])
+      }
+    })
+    .then(([results, fields]) => {
+      if (results && results.length == 1) {
+        successPrint(`Driver is logged in!`);
+        res.redirect('/orders');
+      } else {
+        throw new UserError("Invalid email and/or password!",
+          "/login",
+          200);
+      }
+    })
+    .catch((err) => {
+      errorPrint("user login failed");
+      if (err instanceof UserError) {
+        errorPrint(err.getMessage());
+        res.status(err.getStatus());
+        res.redirect('/login');
+      } else {
+        next(err);
+      }
+    });
+});
+*/
+
+// Check the first user table (e.g., SFSU_User)
+/*
+let driver_user_baseSQL = "SELECT user_email, user_password FROM Driver_User WHERE user_email=? AND user_password=?;"
+db.execute(driver_user_baseSQL, [email, password])
+  .then(([results, fields]) => {
+    if (results && results.length == 1) {
+      successPrint(`Driver is logged in!`);
+      res.redirect('/orders');
+    } else {
+      throw new UserError("Invalid email and/or password!",
+        "/login",
+        200);
+    }
+  })
+  .catch((err) => {
+    errorPrint("user login failed");
+    if (err instanceof UserError) {
+      errorPrint(err.getMessage());
+      res.status(err.getStatus());
+      res.redirect('/login');
+    } else {
+      next(err);
+    }
+  })
+  */
+
+
+module.exports = router;
+
+
+
+/*
   db.query("SELECT * FROM SFSU_User WHERE user_email = ? AND user_password = ?", [email, password])
     .then(([results, fields]) => {
       if (results && results.length > 0) {
         // User found in the first table
         // Perform the necessary actions for successful login
-        res.redirect('/dashboard');
+        res.redirect('/');
         return;
       }
 
-      // Check the second user table (e.g., Another_User_Table)
+      // Check the second user table (e.g., Driver_User)
       return db.query("SELECT * FROM Driver_User WHERE user_email = ? AND user_password = ?", [email, password]);
     })
     .then(([results, fields]) => {
       if (results && results.length > 0) {
         // User found in the second table
         // Perform the necessary actions for successful login
-        res.redirect('/dashboard');
+        res.redirect('/');
         return;
       }
-      // uncomment the following when we complete the registration for the restaurant
-    //   // Check the third user table (e.g., Third_User_Table)
-    //   return db.query("SELECT * FROM Restaurant WHERE email = ? AND password = ?", [email, password]);
-    // })
-    // .then(([results, fields]) => {
-    //   if (results.length > 0) {
-    //     // User found in the third table
-    //     // Perform the necessary actions for successful login
-    //     res.redirect('/dashboard');
-    //     return;
-    //   }
 
       // No user found in any table
       throw new UserError(
@@ -375,10 +474,4 @@ router.post('/login', (req, res, next) => {
       console.error(error);
       // Handle error response
     });
-});
-
-
-
-
-
-module.exports = router;
+    */
