@@ -21,6 +21,7 @@ var handlebars = require("express-handlebars");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var postRouter = require('./routes/posts');
+const flash = require('connect-flash');
 
 const app = express();
 //const port = 3000;
@@ -64,6 +65,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use("/public", express.static(path.join(__dirname, 'public')));
+
+app.use((req, res, next) => {
+  console.log(req.session);
+  if(req.session.username){
+    res.locals.logged = true;
+  }
+  next();
+});
+
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.messages = req.flash();
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
