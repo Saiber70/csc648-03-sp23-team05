@@ -330,30 +330,34 @@ router.post('/login', (req, res, next) => {
 });
 */
 
+/*
 router.post('/login', async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
+  const role = req.body.role;
 
   // Using async/await to handle promises and errors using try/catch blocks
   try {
-    // Check the first user table (e.g., SFSU_User)
-    const sfsu_user_baseSQL = "SELECT user_email, user_password FROM SFSU_User WHERE user_email=? AND user_password=?;";
-    const [sfsuResults] = await db.execute(sfsu_user_baseSQL, [email, password]);
+    if (role === "SFSU user") {
+      // Check the first user table (e.g., SFSU_User)
+      const sfsu_user_baseSQL = "SELECT user_email, user_password FROM SFSU_User WHERE user_email=? AND user_password=?;";
+      const [sfsuResults] = await db.execute(sfsu_user_baseSQL, [email, password]);
 
-    if (sfsuResults.length === 1) {
-      successPrint(`SFSU User is logged in!`);
-      return res.redirect('/');
+      if (sfsuResults.length === 1) {
+        successPrint(`SFSU User is logged in!`);
+        return res.redirect('/');
+      }
+
+    } else if (role === "Delivery driver") {
+      // Check the second user table (e.g., Driver_User)
+      const driver_user_baseSQL = "SELECT user_email, user_password FROM Driver_User WHERE user_email=? AND user_password=?;";
+      const [driverResults] = await db.execute(driver_user_baseSQL, [email, password]);
+
+      if (driverResults.length === 1) {
+        successPrint(`Driver is logged in!`);
+        return res.redirect('/orders');
+      }
     }
-    
-    // Check the second user table (e.g., Driver_User)
-    const driver_user_baseSQL = "SELECT user_email, user_password FROM Driver_User WHERE user_email=? AND user_password=?;";
-    const [driverResults] = await db.execute(driver_user_baseSQL, [email, password]);
-
-    if (driverResults.length === 1) {
-      successPrint(`Driver is logged in!`);
-      return res.redirect('/orders');
-    }
-
     throw new UserError("Invalid email and/or password!", "/login", 200);
   } catch (err) {
     errorPrint("User login failed");
@@ -366,36 +370,43 @@ router.post('/login', async (req, res, next) => {
     next(err);
   }
 });
+*/
 
+router.post('/login', async (req, res, next) => {
+  let username = req.body.username;
+  let password = req.body.password;
+  let role = req.body.role;
 
+  // Variable to store the selected user table
+  let userTable = "";
+  // Determine the user table based on the selected role
+  if (role === "SFSU user") {
+    userTable = "SFSU_User";
+  } else if (role === "Delivery driver") {
+    userTable = "Driver_User";
+  }
 
-
-/*
-router.post('/login', (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
-
-  // Check the first user table (e.g., SFSU_User)
-  let sfsu_user_baseSQL = "SELECT user_email, user_password FROM SFSU_User WHERE user_email=? AND user_password=?;"
-  db.execute(sfsu_user_baseSQL, [email, password])
+  let baseSQL = `SELECT user_name, user_password FROM ${userTable} WHERE user_name=?;`;
+  db.execute(baseSQL, [username])
     .then(([results, fields]) => {
       if (results && results.length == 1) {
-        successPrint(`SFSU User is logged in!`);
-        res.redirect('/');
+        let hashedPassword = results[0].user_password;
+        return bcrypt.compare(password, hashedPassword);
       } else {
-        // Check the second user table (e.g., SFSU_User)
-        let driver_user_baseSQL = "SELECT user_email, user_password FROM Driver_User WHERE user_email=? AND user_password=?;"
-        db.execute(driver_user_baseSQL, [email, password])
+        throw new UserError("invalid username and/or password!", "/login", 200);
       }
     })
-    .then(([results, fields]) => {
-      if (results && results.length == 1) {
-        successPrint(`Driver is logged in!`);
-        res.redirect('/orders');
+    .then((passwordsMatched) => {
+      if (passwordsMatched) {
+        if (role === "SFSU user") {
+          successPrint(`SFSU user ${username} is logged in!`);
+          return res.render('home');
+        } else if (role === "Delivery driver") {
+          successPrint(`Driver user ${username} is logged in!`);
+          return res.render('orders');
+        }
       } else {
-        throw new UserError("Invalid email and/or password!",
-          "/login",
-          200);
+        throw new UserError("Invalid email and/or password!", "/login", 200);
       }
     })
     .catch((err) => {
@@ -409,69 +420,50 @@ router.post('/login', (req, res, next) => {
       }
     });
 });
-*/
-
-// Check the first user table (e.g., SFSU_User)
-/*
-let driver_user_baseSQL = "SELECT user_email, user_password FROM Driver_User WHERE user_email=? AND user_password=?;"
-db.execute(driver_user_baseSQL, [email, password])
-  .then(([results, fields]) => {
-    if (results && results.length == 1) {
-      successPrint(`Driver is logged in!`);
-      res.redirect('/orders');
-    } else {
-      throw new UserError("Invalid email and/or password!",
-        "/login",
-        200);
-    }
-  })
-  .catch((err) => {
-    errorPrint("user login failed");
-    if (err instanceof UserError) {
-      errorPrint(err.getMessage());
-      res.status(err.getStatus());
-      res.redirect('/login');
-    } else {
-      next(err);
-    }
-  })
-  */
 
 
 module.exports = router;
-
-
-
 /*
-  db.query("SELECT * FROM SFSU_User WHERE user_email = ? AND user_password = ?", [email, password])
-    .then(([results, fields]) => {
-      if (results && results.length > 0) {
-        // User found in the first table
-        // Perform the necessary actions for successful login
-        res.redirect('/');
-        return;
+  try {
+    let userTable = ""; // Variable to store the selected user table
+ 
+    // Determine the user table based on the selected role
+    if (role === "SFSU user") {
+      userTable = "SFSU_User";
+    } else if (role === "Delivery driver") {
+      userTable = "Driver_User";
+    }
+ 
+    // Construct the SQL query using the selected user table
+    const baseSQL = `SELECT user_email, user_password FROM ${userTable} WHERE user_email=?;`;
+ 
+    // Execute the SQL query
+    // Array of userResults represent the results obtained from the sql query
+    const [userResults] = await db.execute(baseSQL, [email]);
+ 
+    if (userResults.length === 1) {
+      let hashedPassword = userResults[0].user_password;
+      let passwordsMatched = await bcrypt.compare(password, hashedPassword);
+      if (passwordsMatched) {
+        if (role === "SFSU user") {
+          successPrint("SFSU User is logged in!");
+          return res.render('home');
+        } else if (role === "Delivery driver") {
+          successPrint("Driver is logged in!");
+          return res.render('orders');
+        }
       }
-
-      // Check the second user table (e.g., Driver_User)
-      return db.query("SELECT * FROM Driver_User WHERE user_email = ? AND user_password = ?", [email, password]);
-    })
-    .then(([results, fields]) => {
-      if (results && results.length > 0) {
-        // User found in the second table
-        // Perform the necessary actions for successful login
-        res.redirect('/');
-        return;
-      }
-
-      // No user found in any table
-      throw new UserError(
-        "Invalid email or password",
-        "/login",
-        200
-      );
-    })
-    .catch(error => {
-      console.error(error);
-      // Handle error response
-    });
-    */
+    }
+ 
+    throw new UserError("Invalid email and/or password!", "/login", 200);
+  } catch (err) {
+    errorPrint("User login failed");
+    if (err instanceof UserError) {
+      errorPrint(err.getMessage());
+      res.status(err.getStatus());
+      return res.redirect('/login');
+    }
+    next(err);
+  }
+});
+*/
