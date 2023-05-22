@@ -47,11 +47,29 @@
   <div id="main-container">
     {{> banner}}
     {{> nav}}
+    {{> flashmessage}}
     {{{body}}}
     {{> footer}}
   </div>
+  {{#if logged}}
   <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    let element = document.getElementById('logout-button');
+    if (element) {
+      element.onclick = (event) => {
+        fetch('/users/logout', {
+          method: "POST"
+        })
+          .then((data) => {
+            location.replace('/');
+          })
+      }
+    }
+  </script>
+  {{/if}}
+
+
+  <script>
+    // JavaScript for disabling form submissions if there are invalid fields
     (function () {
       'use strict'
       // Fetch all the forms we want to apply custom Bootstrap validation styles to
