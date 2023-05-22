@@ -372,7 +372,7 @@ router.post('/login', async (req, res, next) => {
 });
 */
 
-router.post('/login', async (req, res, next) => {
+router.post('/login', (req, res, next) => {
   let username = req.body.username;
   let password = req.body.password;
   let role = req.body.role;
@@ -393,17 +393,21 @@ router.post('/login', async (req, res, next) => {
         let hashedPassword = results[0].user_password;
         return bcrypt.compare(password, hashedPassword);
       } else {
-        throw new UserError("invalid username and/or password!", "/login", 200);
+        throw new UserError("Invalid username and/or password!", "/login", 200);
       }
     })
     .then((passwordsMatched) => {
       if (passwordsMatched) {
         if (role === "SFSU user") {
           successPrint(`SFSU user ${username} is logged in!`);
-          return res.render('home');
+          res.locals.logged = true;
+          req.session.username = username;
+          return res.redirect('/');
         } else if (role === "Delivery driver") {
           successPrint(`Driver user ${username} is logged in!`);
-          return res.render('orders');
+          res.locals.logged = true;
+          req.session.username = username;
+          return res.redirect('/orders');
         }
       } else {
         throw new UserError("Invalid email and/or password!", "/login", 200);
@@ -419,6 +423,19 @@ router.post('/login', async (req, res, next) => {
         next(err);
       }
     });
+});
+
+router.post('/logout', (req, res, next) => {
+  req.session.destroy((err) => {
+    if (err) {
+      errorPrint('session could not be destroyed.');
+      next(err);
+    } else {
+      successPrint('Session was successfully destroyed');
+      res.clearCookie('csid');
+      res.json({ status: 'OK', mesage: 'user is logged out' });
+    }
+  })
 });
 
 
