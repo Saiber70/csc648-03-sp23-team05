@@ -9,7 +9,7 @@
             <div class="form-group">
                 <label for="restaurant_name" class="form-label">Restaurant Name*</label>
                 <input placeholder="Restaurant Name" class="form-control" type="text" name="restaurant_name" required
-                    pattern="">
+                    minlength="6" maxlength="60" pattern="^[a-zA-Z0-9\s\-.,+'@$!%*#?&]+$">
                 <div class="invalid-feedback">
                     Please add a valid restaurant name.
                 </div>
@@ -18,41 +18,40 @@
             <div class="form-group">
                 <label for="restaurant_address" class="form-label">Restaurant Address*</label>
                 <input placeholder="Street Address" class="form-control" type="text" name="restaurant_address" required
-                    pattern="">
+                    minlength="10" maxlength="100" pattern="[A-Za-z0-9\s#]+">
                 <div class="invalid-feedback">
-                    Please add a valid street address.
+                    Please add a valid street address (e.g. 1600 Holloway Ave).
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="city" class="form-label">City*</label>
-                <input placeholder="City" class="form-control" type="text" name="city" required pattern="">
+                <input placeholder="City" class="form-control" type="text" name="city" required minlength="4"
+                    maxlength="20" pattern="[A-Za-z\s]+">
                 <div class="invalid-feedback">
-                    Please add a valid city.
+                    Please add a valid city (e.g. San Francisco).
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="state" class="form-label">State*</label>
-                <input placeholder="State" class="form-control" type="text" name="state" required pattern="">
+                <input placeholder="State" class="form-control" type="text" name="state" required pattern="[A-Z]{2}">
                 <div class="invalid-feedback">
-                    Please add a valid state.
+                    Please provide a valid state in the specified format (e.g. CA).
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="country" class="form-label">Country*</label>
-                <input placeholder="Country" class="form-control" type="text" name="country" required pattern="">
-                <div class="invalid-feedback">
-                    Please add a valid country.
-                </div>
+                <input class="form-control" type="text" name="country" value="United States" readonly>
             </div>
 
             <div class="form-group">
                 <label for="zip_code" class="form-label">Zip Code*</label>
-                <input placeholder="Zip Code" class="form-control" type="text" name="zip_code" required pattern="">
+                <input placeholder="Zip Code" class="form-control" type="text" name="zip_code" required
+                    pattern="[0-9]{5}(-[0-9]{4})?">
                 <div class="invalid-feedback">
-                    Please add a valid zip code.
+                    Please add a valid zip code (e.g. 5-digit number and optional 4-digit extension).
                 </div>
             </div>
 
@@ -81,79 +80,43 @@
                     <input placeholder="Choose file..." class="custom-file-input" type="file" name="file_upload"
                         accept="image/*" required>
                     <div class="invalid-feedback">
-                        Please provide an image of your restaurant.
+                        Please provide an image of your restaurant in the specified format.
                     </div>
                 </div>
             </div>
+
+            <!--
+            <div class="form-group">
+                <label for="upload" class="form-label">Upload Menu*</label><br>
+                <a id="upload_menu_link" href="/upload" target="_blank">UPLOAD MENU</a>
+                <div class="invalid-feedback">
+                    Please fill out this section.
+                </div>
+            </div>-->
     </div>
-
-    <fieldset>
-        <div class="shadow p-3 mb-5 bg-white rounded">
-            <div class="row justify-content-md-center">
-                <h1>Uploading Menu Items</h1>
-            </div>
-
-            <div class="form-group">
-                <p>Upload image of the dish*</p>
-                <div class="custom-file mb-4" style="margin-bottom:2rem">
-                    <label for="item_upload" class="custom-file-label">Choose file...</label>
-                    <input placeholder="Choose file..." class="custom-file-input" type="file" name="item_upload"
-                        accept="image/*" required>
-                    <div class="invalid-feedback">
-                        Please provide an image of the menu item.
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="dish_name" class="form-label">Name of dish*</label>
-                <input placeholder="Name of dish" class="form-control" type="text" name="dish_name" required pattern="">
-                <div class="invalid-feedback">
-                    Please add the name of your dish.
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="dish_category">Category of dish:</label>
-                <select id="dish_category" required name="dish_category">
-                    <option value=""></option>
-                    <option value="American">American</option>
-                    <option value="Mexican">Mexican</option>
-                    <option value="Asian">Asian</option>
-                    <option value="Italian">Italian</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="dish_price" class="form-label">Price of dish*</label>
-                <input placeholder="Price of dish" class="form-control" type="text" name="dish_price" required
-                    pattern="">
-                <div class="invalid-feedback">
-                    Please add the price of your dish.
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="dish_description" class="form-label">Describe your dish*</label><br>
-                <textarea placeholder="Description of dish..." required name="dish_description" rows="4"
-                    cols="50"></textarea>
-            </div>
-
-            <div class="d-flex justify-content-center" style="margin-bottom:2rem">
-                <div class="button_container">
-                    <button type="reset" class="btn btn-outline-dark">Cancel</button>
-                    <button type="submit" class="btn btn-outline-dark">Add Next Item</button>
-                </div>
-            </div>
-        </div>
-    </fieldset>
-
 
     <div class="d-flex justify-content-center" style="margin-bottom:2rem">
         <div class="button_container">
             <button type="reset" class="btn btn-outline-dark">Cancel</button>
-            <button type="submit" class="btn btn-outline-dark">Submit Request</button>
+            <button id="restaurant_submit" type="submit" class="btn btn-outline-dark">Submit Request</button>
         </div>
     </div>
     </form>
 </div>
+
+
+<!--
+<script>
+    // Get references to the elements
+    const uploadMenuLink = document.getElementById("upload_menu_link");
+    const submitButton = document.getElementById("restaurant_submit");
+
+    // Function to enable the submit button when the link is clicked
+    function enableSubmitButton() {
+        submitButton.removeAttribute("disabled");
+    }
+
+
+    // Add a click event listener to the upload menu link
+    uploadMenuLink.addEventListener("click", enableSubmitButton);
+</script>-->
