@@ -7,7 +7,7 @@
 
 # Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
-1. Server URL: ec2-54-67-122-200.us-west-1.compute.amazonaws.com Public IP: 54.67.122.200:3000
+1. Server URL:  ec2-54-219-129-242.us-west-1.compute.amazonaws.com Public IP: 54.67.122.200:3000
 2. SSH Username: ubuntu
 3. SSH password/key (file included in credentials folder): "team05-key.pem"
 4. Database URL: 127.0.0.1 Port: 3306
@@ -21,7 +21,7 @@
    3. Secure the key with the following command:
       - "chmod 400 team05-key.pem"
    5. 4. Use ssh to connect to the server instance using the above information.
-      - "ssh -i "team05-key.pem" ubuntu@ec2-54-67-122-200.us-west-1.compute.amazonaws.com"
+      - "ssh -i "team05-key.pem" ubuntu@ec2-54-219-129-242.us-west-1.compute.amazonaws.com"
    6. Deploy web server using Server URL posted above.
 
 # Most important things to Remember
