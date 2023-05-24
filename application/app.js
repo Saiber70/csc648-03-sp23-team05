@@ -47,6 +47,7 @@ var mysqlSessionStore = new mysqlSession(
   require('./conf/database')
 );
 
+// used to set up a session table in our database
 app.use(sessions({
   key: "csid",
   secret: "my-secret-key",
@@ -66,6 +67,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use("/public", express.static(path.join(__dirname, 'public')));
 
+// session handler for login/logout
 app.use((req, res, next) => {
   console.log(req.session);
   if(req.session.username){
@@ -81,13 +83,12 @@ app.use((req, res, next) => {
   next();
 });
 
+// sets up all our routers
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postRouter);
 
-
-//app.use('/post_restaurant_info', postRestaurantInfoRouter);
-
+// session handler for making search persistent across all pages (only search working)
 app.use(function (req, res, next) {
   res.locals.searchTerm = req.session.searchTerm;
   res.locals.category = req.session.category;
