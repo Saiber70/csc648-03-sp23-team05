@@ -77,9 +77,9 @@ function search(req, res, next) {
     let category = req.query.category;
     let filter = req.query.filter;
     let query = 'SELECT * FROM Restaurant';
-
+    
     if (searchTerm != '' && category != '') {
-        query = `SELECT * FROM Restaurant WHERE restaurant_category = ? AND restaurant_name LIKE ?`;
+        query = `SELECT * FROM Restaurant WHERE category_name = ? AND restaurant_name LIKE ?`;
         db.execute(query, [category, `%${searchTerm}%`])
             .then(([result, fields]) => {
                 req.searchResult = result;
@@ -111,7 +111,7 @@ function search(req, res, next) {
                 next();
             });
     } else if (searchTerm == '' && category != '') {
-        query = `SELECT * FROM Restaurant WHERE restaurant_category = ?`;
+        query = `SELECT * FROM Restaurant WHERE category_name = ?`;
         db.execute(query, [category])
             .then(([result, fields]) => {
                 req.searchResult = result;
@@ -172,6 +172,10 @@ router.get('/register_driver', (req, res, next) => {
 
 router.get('/register_restaurant', (req, res, next) => {
     res.render('register_restaurant');
+});
+
+router.get('/register_restaurant2', (req, res, next) => {
+    res.render('register_restaurant2');
 });
 
 router.get('/upload', (req, res, next) => {
