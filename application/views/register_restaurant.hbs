@@ -4,7 +4,7 @@
             <h2>Restaurant Details</h2>
         </div>
 
-        <form id="restaurant-form" action="/posts/register_restaurant" method="POST"
+        <form id="restaurant-form" action="/users/register_restaurant" method="POST" enctype="multipart/form-data"
             class="col justify-content-md-center needs-validation" novalidate>
             <div class="form-group">
                 <label for="restaurant_name" class="form-label">Restaurant Name*</label>
@@ -16,9 +16,9 @@
             </div>
 
             <div class="form-group">
-                <label for="restaurant_address" class="form-label">Restaurant Address*</label>
-                <input id="restaurant_address" placeholder="Street Address" class="form-control" type="text"
-                    name="restaurant_address" required minlength="10" maxlength="100" pattern="[A-Za-z0-9\s#]+">
+                <label for="address_line" class="form-label">Restaurant Address*</label>
+                <input id="address_line" placeholder="Street Address" class="form-control" type="text"
+                    name="address_line" required minlength="10" maxlength="100" pattern="[A-Za-z0-9\s#]+">
                 <div class="invalid-feedback">
                     Please enter a valid street address (e.g. 1600 Holloway Ave).
                 </div>
@@ -85,6 +85,8 @@
                     <option value="$10-$15">$10-$15</option>
                     <option value="$15-$20">$15-$20</option>
                     <option value="$20-$30">$20-$30</option>
+                    <option value="<$10">
+                        <$10< /option>
                 </select>
             </div>
 
@@ -119,15 +121,6 @@
                     </div>
                 </div>
             </div>
-
-            <!--
-            <div class="form-group">
-                <label for="upload" class="form-label">Upload Menu*</label><br>
-                <a id="upload_menu_link" href="/upload" target="_blank">UPLOAD MENU</a>
-                <div class="invalid-feedback">
-                    Please fill out this section.
-                </div>
-            </div>-->
     </div>
 
     <div class="d-flex justify-content-center" style="margin-bottom:2rem">
@@ -138,20 +131,3 @@
     </div>
     </form>
 </div>
-
-
-<!--
-<script>
-    // Get references to the elements
-    const uploadMenuLink = document.getElementById("upload_menu_link");
-    const submitButton = document.getElementById("restaurant_submit");
-
-    // Function to enable the submit button when the link is clicked
-    function enableSubmitButton() {
-        submitButton.removeAttribute("disabled");
-    }
-
-
-    // Add a click event listener to the upload menu link
-    uploadMenuLink.addEventListener("click", enableSubmitButton);
-</script>-->
