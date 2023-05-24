@@ -4,7 +4,7 @@
             <h2>Restaurant Details</h2>
         </div>
 
-        <form id="form" action="/posts/register_restaurant" method="POST"
+        <form id="restaurant-form" action="/posts/register_restaurant" method="POST"
             class="col justify-content-md-center needs-validation" novalidate>
             <div class="form-group">
                 <label for="restaurant_name" class="form-label">Restaurant Name*</label>
@@ -17,8 +17,8 @@
 
             <div class="form-group">
                 <label for="restaurant_address" class="form-label">Restaurant Address*</label>
-                <input placeholder="Street Address" class="form-control" type="text" name="restaurant_address" required
-                    minlength="10" maxlength="100" pattern="[A-Za-z0-9\s#]+">
+                <input id="restaurant_address" placeholder="Street Address" class="form-control" type="text"
+                    name="restaurant_address" required minlength="10" maxlength="100" pattern="[A-Za-z0-9\s#]+">
                 <div class="invalid-feedback">
                     Please add a valid street address (e.g. 1600 Holloway Ave).
                 </div>
@@ -26,7 +26,7 @@
 
             <div class="form-group">
                 <label for="city" class="form-label">City*</label>
-                <input placeholder="City" class="form-control" type="text" name="city" required minlength="4"
+                <input id="city" placeholder="City" class="form-control" type="text" name="city" required minlength="4"
                     maxlength="20" pattern="[A-Za-z\s]+">
                 <div class="invalid-feedback">
                     Please add a valid city (e.g. San Francisco).
@@ -35,7 +35,8 @@
 
             <div class="form-group">
                 <label for="state" class="form-label">State*</label>
-                <input placeholder="State" class="form-control" type="text" name="state" required pattern="[A-Z]{2}">
+                <input id="state" placeholder="State" class="form-control" type="text" name="state" required
+                    pattern="[A-Z]{2}">
                 <div class="invalid-feedback">
                     Please provide a valid state in the specified format (e.g. CA).
                 </div>
@@ -43,7 +44,7 @@
 
             <div class="form-group">
                 <label for="country" class="form-label">Country*</label>
-                <input class="form-control" type="text" name="country" value="United States" readonly>
+                <input id="country" class="form-control" type="text" name="country" value="United States" readonly>
             </div>
 
             <div class="form-group">
@@ -54,6 +55,40 @@
                     Please add a valid zip code (e.g. 5-digit number and optional 4-digit extension).
                 </div>
             </div>
+
+            <div class="form-group">
+                <label for="restaurant_category">Select a category:</label>
+                <select id="restaurant_category" required name="restaurant_category">
+                    <option value=""></option>
+                    <option value="Asian">Asian</option>
+                    <option value="American">American</option>
+                    <option value="Mexican">Mexican</option>
+                    <option value="Italian">Italian</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="delivery_time">Select delivery time:</label>
+                <select id="delivery_time" required name="delivery_time">
+                    <option value=""></option>
+                    <option value="10-15 min">10-15 min</option>
+                    <option value="15-20 min">15-20 min</option>
+                    <option value="20-30 min">20-30 min</option>
+                    <option value="30-40 min">30-40 min</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="price_range">Select price range:</label>
+                <select id="price_range" required name="price_range">
+                    <option value=""></option>
+                    <option value="$10-$15">$10-$15</option>
+                    <option value="$15-$20">$15-$20</option>
+                    <option value="$20-$30">$20-$30</option>
+                </select>
+            </div>
+
+
 
             <p>Special offers (optional)</p>
             <div class="form-group">
