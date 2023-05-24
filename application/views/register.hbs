@@ -11,7 +11,7 @@
                 <input placeholder="First Name" class="form-control" type="text" name="firstname" required
                     pattern="[A-Za-z]+([\-'][A-Za-z]+)*">
                 <div class="invalid-feedback">
-                    Please add a valid first name.
+                    Please enter a valid first name.
                 </div>
             </div>
 
@@ -20,7 +20,7 @@
                 <input placeholder="Last name" class="form-control" type="text" name="lastname" required
                     pattern="^[A-Za-z-']+( [A-Za-z-']+)?$">
                 <div class="invalid-feedback">
-                    Please add a valid last name.
+                    Please enter a valid last name.
                 </div>
             </div>
 
@@ -29,7 +29,7 @@
                 <input placeholder="Username" class="form-control" type="text" name="username" required minlength="6"
                     maxlength="40" pattern="^[a-zA-Z0-9]+$">
                 <div class="invalid-feedback">
-                    Invalid username (must contain 6-40 alphanumeric characters only).
+                    Please enter a valid username (must contain 6-40 alphanumeric characters only).
                 </div>
             </div>
 
@@ -38,7 +38,7 @@
                 <input placeholder="Phone Number" class="form-control" type="tel" name="phone" required
                     pattern="^\d{3}\d{3}\d{4}$">
                 <div class="invalid-feedback">
-                    Invalid phone number.
+                    Please enter a valid phone number.
                 </div>
             </div>
 
@@ -47,7 +47,7 @@
                 <input placeholder="SFSU Email" class="form-control" type="email" name="email" required
                     pattern="[a-zA-Z0-9]+@(mail\.)?sfsu\.edu$">
                 <div class="invalid-feedback">
-                    Not a valid SFSU email.
+                    Please enter a valid SFSU email address.
                 </div>
             </div>
 
@@ -57,8 +57,8 @@
                     required pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[0-9])(?=.*[\-+!@#$^&*])[a-zA-Z0-9\-+!@#$^&*]{8,20}$"
                     minlength="8" maxlength="16">
                 <div class="invalid-feedback">
-                    Invalid Password (must contain the following: 1 number, 1 uppercase letter, and 1 special
-                    character(- + ! @ # $ ^ & *))
+                    Please enter a valid password (must contain the following: 1 number, 1 uppercase letter, and 1 special
+                    character (- + ! @ # $ ^ & *)).
                 </div>
             </div>
 
@@ -68,7 +68,7 @@
                     data-match="#inputPassword" data-match-error="Password does not match" type="password"
                     name="re_password" required>
                 <div class="invalid-feedback" id="CheckPasswordMatch">
-                    Must confirm password.
+                    Please confirm your password.
                 </div>
             </div>
 

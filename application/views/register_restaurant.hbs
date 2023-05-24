@@ -11,7 +11,7 @@
                 <input placeholder="Restaurant Name" class="form-control" type="text" name="restaurant_name" required
                     minlength="6" maxlength="60" pattern="^[a-zA-Z0-9\s\-.,+'@$!%*#?&]+$">
                 <div class="invalid-feedback">
-                    Please add a valid restaurant name.
+                    Please enter a valid restaurant name.
                 </div>
             </div>
 
@@ -20,7 +20,7 @@
                 <input placeholder="Street Address" class="form-control" type="text" name="restaurant_address" required
                     minlength="10" maxlength="100" pattern="[A-Za-z0-9\s#]+">
                 <div class="invalid-feedback">
-                    Please add a valid street address (e.g. 1600 Holloway Ave).
+                    Please enter a valid street address (e.g. 1600 Holloway Ave).
                 </div>
             </div>
 
@@ -29,7 +29,7 @@
                 <input placeholder="City" class="form-control" type="text" name="city" required minlength="4"
                     maxlength="20" pattern="[A-Za-z\s]+">
                 <div class="invalid-feedback">
-                    Please add a valid city (e.g. San Francisco).
+                    Please enter a valid city (e.g. San Francisco).
                 </div>
             </div>
 
@@ -37,7 +37,7 @@
                 <label for="state" class="form-label">State*</label>
                 <input placeholder="State" class="form-control" type="text" name="state" required pattern="[A-Z]{2}">
                 <div class="invalid-feedback">
-                    Please provide a valid state in the specified format (e.g. CA).
+                    Please enter a valid state in the specified format (e.g. CA).
                 </div>
             </div>
 
@@ -51,7 +51,7 @@
                 <input placeholder="Zip Code" class="form-control" type="text" name="zip_code" required
                     pattern="[0-9]{5}(-[0-9]{4})?">
                 <div class="invalid-feedback">
-                    Please add a valid zip code (e.g. 5-digit number and optional 4-digit extension).
+                    Please enter a valid zip code (e.g. 5-digit number and optional 4-digit extension).
                 </div>
             </div>
 
@@ -74,13 +74,13 @@
             </div>
 
             <div class="form-group">
-                <p>Upload Thumbnail for Restaurant *</p>
+                <p>Upload Thumbnail for Restaurant*</p>
                 <div class="custom-file mb-4" style="margin-bottom:2rem">
                     <label for="file_upload" class="custom-file-label">Choose file...</label>
                     <input placeholder="Choose file..." class="custom-file-input" type="file" name="file_upload"
                         accept="image/*" required>
                     <div class="invalid-feedback">
-                        Please provide an image of your restaurant in the specified format.
+                        Please upload an image of your restaurant in the specified format.
                     </div>
                 </div>
             </div>
