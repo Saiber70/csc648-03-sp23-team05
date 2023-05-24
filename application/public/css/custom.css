@@ -3,7 +3,8 @@
 *
 * File: custom.css
 *
-* Description: Our main css file to add custom styling.
+* Description: Our main css file to add custom styling, especially for
+* overwriting default bootstrap css.
 *
 **************************************************************/
 
@@ -195,31 +196,3 @@
   background-color: purple;
   border-color: white;
 }
-
-
-
-/*
-#login-form {
-  padding-bottom:3rem; 
-  padding-top:3rem;
-  margin-bottom:3rem
-}
-
-#email-field {
-  margin-bottom:1rem;
-  margin-top:1rem
-}
-
-#password-field {
-  margin-bottom:1rem;
-  margin-top:1rem;
-}
-
-#login-buttons {
-  margin-bottom:2rem;
-}
-
-#password-link {
-  margin: 1rem;
-}
-*/
