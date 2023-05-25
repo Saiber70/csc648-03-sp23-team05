@@ -7,7 +7,7 @@
 
 # Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
-1. Server URL:  ec2-54-219-129-242.us-west-1.compute.amazonaws.com Public IP: 54.67.122.200:3000
+1. Server URL:  ec2-54-219-129-242.us-west-1.compute.amazonaws.com:3000 Public IP: 54.219.129.242:3000
 2. SSH Username: ubuntu
 3. SSH password/key (file included in credentials folder): "team05-key.pem"
 4. Database URL: 127.0.0.1 Port: 3306
