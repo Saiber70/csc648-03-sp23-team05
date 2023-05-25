@@ -1,3 +1,4 @@
+<!--- start of form-->
 <div class="container" style="margin-top:2rem;">
     <div class="shadow p-3 mb-5 bg-white rounded">
         <div class="row justify-content-md-center">
@@ -11,7 +12,7 @@
                 <input placeholder="First Name" class="form-control" type="text" name="firstname" required
                     pattern="[A-Za-z]+([\-'][A-Za-z]+)*">
                 <div class="invalid-feedback">
-                    Please add a valid first name.
+                    Please enter a valid first name.
                 </div>
             </div>
 
@@ -20,7 +21,7 @@
                 <input placeholder="Last name" class="form-control" type="text" name="lastname" required
                     pattern="^[A-Za-z-']+( [A-Za-z-']+)?$">
                 <div class="invalid-feedback">
-                    Please add a valid last name.
+                    Please enter a valid last name.
                 </div>
             </div>
 
@@ -29,7 +30,7 @@
                 <input placeholder="Username" class="form-control" type="text" name="username" required minlength="6"
                     maxlength="40" pattern="^[a-zA-Z0-9]+$">
                 <div class="invalid-feedback">
-                    Invalid username (must contain 6-40 alphanumeric characters only).
+                    Please enter a valid username (must contain 6-40 alphanumeric characters only).
                 </div>
             </div>
 
@@ -38,7 +39,7 @@
                 <input placeholder="Email" class="form-control" type="email" name="email" required
                     pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}">
                 <div class="invalid-feedback">
-                    Not a valid email address.
+                    Please enter a valid email address.
                 </div>
             </div>
 
@@ -48,7 +49,7 @@
                 <input placeholder="Phone Number" class="form-control" type="tel" name="phone" required
                     pattern="^\d{3}\d{3}\d{4}$">
                 <div class="invalid-feedback">
-                    Invalid phone number.
+                    Please enter a valid phone number.
                 </div>
             </div>
 
@@ -66,7 +67,7 @@
                 <input placeholder="License Number" class="form-control" type="text" name="license_number" required
                     pattern="^[A-Z]\d{7}$">
                 <div class="invalid-feedback">
-                    Please provide a valid California license number(EX: A0001124).
+                    Please enter a valid California license number (EX: A0001124).
                 </div>
             </div>
 
@@ -76,8 +77,8 @@
                     required pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[0-9])(?=.*[\-+!@#$^&*])[a-zA-Z0-9\-+!@#$^&*]{8,20}$"
                     minlength="8" maxlength="16">
                 <div class="invalid-feedback">
-                    Invalid Password (must contain the following: 1 number, 1 uppercase letter, and 1 special
-                    character(- + ! @ # $ ^ & *))
+                    Please enter a valid password (must contain the following: 1 number, 1 uppercase letter, and 1 special
+                    character (- + ! @ # $ ^ & *)).
                 </div>
             </div>
 
@@ -87,7 +88,7 @@
                     data-match="#inputPassword" data-match-error="Password does not match" type="password"
                     name="re_password" required>
                 <div class="invalid-feedback" id="CheckPasswordMatch">
-                    Must confirm password.
+                    Please confirm your password.
                 </div>
             </div>
 
@@ -97,7 +98,7 @@
                     name="availableTime" autocomplete="availableTime"
                     pattern="^(Monday|Tuesday|Wednesday|Thursday|Friday)(-(Monday|Tuesday|Wednesday|Thursday|Friday))?\s((0?[1-9]|1[0-2]):[0-5][0-9](AM|PM))\s-\s((0?[1-9]|1[0-2]):[0-5][0-9](AM|PM))$">
                 <div class="invalid-feedback">
-                    Must specify available working hours (excluding weekends)
+                    Please specify your available working hours (excluding weekends).
                 </div>
             </div>
 
@@ -122,74 +123,4 @@
     </div>
     </form>
 </div>
-
-
-
-
-<!--- start of form-->
-<!--
-<div class="container" style="margin-top:2rem;">
-    <div class="shadow p-3 mb-5 bg-white rounded">
-        <div class="row justify-content-md-center">
-            <h2>Register Driver</h2>
-        </div>
-        <form class="col justify-content-md-center" style="margin-bottom:1rem; margin-top:1rem" id="form" name="form" method="POST" action="/users/register_driver">
-            <div id="fist_name" style="margin-bottom:10px">
-                <p>First Name*</p>
-                <input class="form-control mr-sm-2"  placeholder="First Name" type="text" required name="firstname" autocomplete="firstname" >
-            </div>
-            <div id="last_name" style="margin-bottom:10px">
-                <p>Last Name*</p>
-                <input class="form-control mr-sm-2" placeholder="Last Name" type="text" required name="lastname" autocomplete="lastname" >
-            </div>
-             <div id="username" style="margin-bottom:10px">
-                <p>username*</p>
-                <input class="form-control mr-sm-2"  placeholder="username" type="text" required name="username" autocomplete="username">
-            </div>
-
-            </div>
-            <div id="email" style="margin-bottom:10px">
-                <p>Email*</p>
-                <input type="email" placeholder="Email" class="form-control" type="text" required name="email" autocomplete="email">
-            </div>
-            <div id="phone_number" style="margin-bottom:10px">
-                <p>Phone Number*</p>
-                <input placeholder="Phone Number" class="form-control" type="text"  required name="phone" autocomplete="phone">
-            </div>
-            <div id="vehicle_type" style="margin-bottom:10px">
-                <p>Vehicle Type*</p>
-                <input placeholder="Vehicle Type" class="form-control" type="text" required name="vehicle" autocomplete="vehicle">
-            </div>
-            <div id="license_number" style="margin-bottom:10px">
-                <p>License Number*</p>
-                <input placeholder="License Number" class="form-control" type="text" required name="license_number" autocomplete="license_number">
-            </div>
-            <div id="password" style="margin-bottom:10px">
-                <p>Password*</p>
-                <input type="password" placeholder="Password" class="form-control" type="text" required name="password">
-            </div>
-            <div id="re_password" style="margin-bottom:10px">
-                <p>Renter Password*</p>
-                <input type="password" placeholder="Renter-Password" class="form-control" type="text" required name="re_password">
-            </div>
-            <div class="w-100"></div>
-            <div style="margin-bottom:1rem">
-                <p>When are you available to work?</p>
-                <textarea class="col-lg-8 align-self-center" required name="availableTime" autocomplete="availableTime" ></textarea>
-            </div>
-            <div class="custom-control custom-checkbox mb-4">
-                <input type="checkbox" class="custom-control-input" id="terms_checkbox">
-                <label class="custom-control-label" for="terms_checkbox">
-                    <a href="https://www.youtube.com/watch?v=HMGetv40FkI">Terms and Conditions</a>
-                </label>
-            </div>        
-        </form>
-    </div>
-    <div class="d-flex justify-content-center" style="margin-bottom:2rem">
-        <div class="button_container">
-            <button form="form" type="submit" class="btn btn-outline-dark " href="....">Cancel</button>
-            <button form="form" type="submit" class="btn btn-outline-dark " href="....">Submit</button>
-        </div>
-    </div>
-</div>-->
 <!--- end of form-->

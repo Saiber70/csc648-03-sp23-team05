@@ -1,26 +1,18 @@
 /**************************************************************
 * Author: Mario Leyva Moreno and Hajime Miyazaki
 *
-* File: database.js
+* File: index.js
 *
-* Description: The purpose of this file is to set up a connection to our mysql database.
+* Description: The purpose of this file is to set up the routes from our home page to the rest
+* of our pages in the application. We have also implemented the search functionality for users to be able
+* to perform basic search queries using a fuzzy search implementation.
 *
 **************************************************************/
 var express = require('express');
 const router = express.Router();
 var db = require('../conf/database');
 
-
-db.getConnection((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log('MySql Connected!');
-    db.query('USE teamdb');
-});
-
 // used to test connection to MYSQL database
-/*
 db.getConnection((err) => {
     if (err) {
         throw err;
@@ -28,58 +20,19 @@ db.getConnection((err) => {
     console.log('MySql Connected!');
     db.query('USE team05db');
 });
-*/
 
-// function to search the back-end
-// function search(req, res, next) {
-//     // user's search term
-//     let searchTerm = req.query.search;
-//     // user's selected category
-//     let category = req.query.category;
-//     let filter = req.query.filter;
-//     let query = 'SELECT * FROM Restaurant';
-
-//     if (searchTerm != '' && category != '') {
-//         query = `SELECT * FROM Restaurant WHERE restaurant_category = '` + category + `' AND restaurant_name LIKE '%` + searchTerm + `%'`;
-//     } else if (searchTerm != '' && category == '') {
-//         query = `SELECT * FROM Restaurant WHERE restaurant_name LIKE '%` + searchTerm + `%'`;
-//     } else if (searchTerm == '' && category != '') {
-//         query = `SELECT * FROM Restaurant WHERE restaurant_category = '` + category + `'`;
-//     }
-
-//     if (filter == 'Low to High') {
-//         query = `SELECT * FROM Restaurant ORDER BY price_range`;
-//     } else if (filter == 'High to Low') {
-//         query = `SELECT * FROM Restaurant ORDER BY price_range DESC`;
-//     } else if (filter == 'Delivery Time') {
-//         query = `SELECT * FROM Restaurant ORDER BY delivery_time`;
-//     } else if (filter == 'Featured') {
-//         query = `SELECT * FROM Restaurant ORDER BY restaurant_id`;
-//     }
-
-//     db.query(query, (err, result) => {
-//         if (err) {
-//             req.searchResult = [];
-//             req.searchTerm = "";
-//             req.category = "";
-//             next();
-//         }
-
-//         req.searchResult = result;
-//         req.searchTerm = searchTerm;
-//         req.category = category;
-
-//         next();
-//     });
-// }
+// search function to search for restaurants on the site by category and/or search text field
 function search(req, res, next) {
+
+
     let searchTerm = req.query.search;
     let category = req.query.category;
     let filter = req.query.filter;
     let query = 'SELECT * FROM Restaurant';
 
+    // search for nonempty search term and category and then querying the results
     if (searchTerm != '' && category != '') {
-        query = `SELECT * FROM Restaurant WHERE restaurant_category = ? AND restaurant_name LIKE ?`;
+        query = `SELECT * FROM Restaurant WHERE category_name = ? AND restaurant_name LIKE ?`;
         db.execute(query, [category, `%${searchTerm}%`])
             .then(([result, fields]) => {
                 req.searchResult = result;
@@ -94,6 +47,7 @@ function search(req, res, next) {
                 console.error(err);
                 next();
             });
+    // search for nonempty search term and non-selected category
     } else if (searchTerm != '' && category == '') {
         query = `SELECT * FROM Restaurant WHERE restaurant_name LIKE ?`;
         db.execute(query, [`%${searchTerm}%`])
@@ -110,8 +64,10 @@ function search(req, res, next) {
                 console.error(err);
                 next();
             });
+
+    // search for empty search term and selected category
     } else if (searchTerm == '' && category != '') {
-        query = `SELECT * FROM Restaurant WHERE restaurant_category = ?`;
+        query = `SELECT * FROM Restaurant WHERE category_name = ?`;
         db.execute(query, [category])
             .then(([result, fields]) => {
                 req.searchResult = result;
@@ -126,6 +82,8 @@ function search(req, res, next) {
                 console.error(err);
                 next();
             });
+
+    // if both fields empty, just return all of the results and display to the user
     } else {
         db.execute(query)
             .then(([result, fields]) => {
@@ -174,6 +132,10 @@ router.get('/register_restaurant', (req, res, next) => {
     res.render('register_restaurant');
 });
 
+router.get('/register_restaurant2', (req, res, next) => {
+    res.render('register_restaurant2');
+});
+
 router.get('/upload', (req, res, next) => {
     res.render('menu_upload');
 });
@@ -194,7 +156,8 @@ router.get('/reset_password', (req, res, next) => {
     res.render('reset_password');
 });
 
-//http://localhost:3000/result?category=value&search=value
+// route to results page where user's search results are displayed
+
 router.get('/result', search, function (req, res, next) {
     let searchResult = req.searchResult;
     res.render('result', {
@@ -204,17 +167,5 @@ router.get('/result', search, function (req, res, next) {
         category: req.category
     });
 });
-
-// /** for the signup button */
-// router.get('/dashboard', isLoggedIn, (req, res) => {
-//     // render dashboard page
-//   });
-  
-//   function isLoggedIn(req, res, next) {
-//     if (req.isAuthenticated()) {
-//       return next();
-//     }
-//     res.redirect('/register');
-//   }
 
 module.exports = router;

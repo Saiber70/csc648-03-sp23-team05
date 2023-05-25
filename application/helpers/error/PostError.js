@@ -1,16 +1,17 @@
 /**************************************************************
 * Author: Mario Leyva Moreno
 *
-* File: UserError.js
+* File: PostError.js
 *
 * Description: Helper function that sets up an object to send error messages.
-* It sends the error message, the url of the page that the user is redirected to, 
-* and what kind of error was thrown. Used in users.js during user registration and login.
+* It sends the error message, the url of the page that the user is redirected to,
+* and what kind of error was thrown. Used in posts.js for uploading images.
 *
 **************************************************************/
 
 
-class UserError extends Error {
+
+class PostError extends Error {
     constructor(message, redirectURL, status) {
         super(message);
         this.redirectURL = redirectURL;
@@ -30,4 +31,4 @@ class UserError extends Error {
     }
 }
 
-module.exports = UserError;
+module.exports = PostError;

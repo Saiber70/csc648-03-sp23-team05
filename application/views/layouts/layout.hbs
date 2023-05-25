@@ -6,7 +6,9 @@
 * Description: This file contains all of the reusable components for our handlebars
 * templates, which includes all of our imported css and javascript libraries. The body
 * of this page is a placeholder for the content of our application and includes references
-* to our navigation bar and footer, which remain static across all pages.
+* to our website banner, navigation bar, and footer, which remain static across all pages.
+* It also includes scripts for our login/logout functionality and bootstrap client side validation code
+* as they are used across all of our pages.
 *
 **************************************************************/-->
 
@@ -37,7 +39,6 @@
     crossorigin="anonymous"></script>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmqtDK6VhShU_U-oV8SrGI53wSluNA-wI&callback=initMap"></script>
-
   {{#each js}}
   <script defer type="text/javascript" src="/public/js/{{this}}"></script>
   {{/each}}
@@ -66,8 +67,8 @@
     }
   </script>
   {{/if}}
-
-
+  
+  <!--reference: https://getbootstrap.com/docs/5.0/forms/validation/-->
   <script>
     // JavaScript for disabling form submissions if there are invalid fields
     (function () {
@@ -82,6 +83,7 @@
               event.preventDefault()
               event.stopPropagation()
             } else {
+              // added password validation code to prevent submission if password confirmation is invalid
               let password = document.getElementById('inputPassword').value;
               let confirmPassword = document.getElementById('inputPasswordConfirm').value;
               if (password !== confirmPassword) {

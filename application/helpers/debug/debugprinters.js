@@ -1,3 +1,13 @@
+/**************************************************************
+* Author: Mario Leyva Moreno
+*
+* File: debugprinters.js
+*
+* Description: Helper function that sets up objects to show descriptive messages in the console.
+* Messages will appear in different colors to highlight a success message, an error message, or a request.
+*
+**************************************************************/
+
 const colors = require('colors');
 
 colors.setTheme({
